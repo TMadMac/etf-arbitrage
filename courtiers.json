@@ -1,0 +1,55 @@
+{
+  "Boursorama": {
+    "grilles": {
+      "Découverte": {
+        "type": "paliers",
+        "paliers": [
+          {"min": 0, "max": 500, "fee_type": "fixed", "fee": 1.99},
+          {"min": 500, "max": 999999999, "fee_type": "percentage", "fee": 0.60}
+        ]
+      },
+      "Classic": {
+        "type": "paliers",
+        "paliers": [
+          {"min": 0, "max": 1000, "fee_type": "fixed", "fee": 5.50},
+          {"min": 1000, "max": 999999999, "fee_type": "percentage", "fee": 0.48, "min_fee": 8.95}
+        ]
+      },
+      "Trader": {
+        "type": "paliers",
+        "paliers": [
+          {"min": 0, "max": 7750, "fee_type": "fixed", "fee": 16.65},
+          {"min": 7750, "max": 999999999, "fee_type": "percentage", "fee": 0.22}
+        ]
+      },
+      "Ultimate Trader": {
+        "type": "paliers",
+        "paliers": [
+          {"min": 0, "max": 10000, "fee_type": "fixed", "fee": 9.90},
+          {"min": 10000, "max": 999999999, "fee_type": "percentage", "fee": 0.12}
+        ]
+      }
+    }
+  },
+  "Fortuneo": {
+    "grilles": {
+      "Starter": {
+        "type": "simple",
+        "fee_type": "percentage",
+        "fee": 0.35
+      },
+      "Progress": {
+        "type": "mixed",
+        "fixed": 4.90,
+        "threshold": 3000,
+        "percentage": 0.15
+      },
+      "Trader Pro": {
+        "type": "mixed",
+        "fixed": 9.50,
+        "threshold": 10000,
+        "percentage": 0.10
+      }
+    }
+  }
+}
