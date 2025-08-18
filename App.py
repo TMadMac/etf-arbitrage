@@ -7,7 +7,7 @@ import json
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Simulateur d'Arbitrage d'ETFs",
+    page_title="Simulateur de Remplacement ETF",
     page_icon="🔄",
     layout="wide"
 )
@@ -181,7 +181,7 @@ def load_custom_css():
 def render_custom_header():
     st.markdown("""
     <div class="custom-header">
-        <h1>🔄 Simulateur d'Arbitrage d'ETFs</h1>
+        <h1>🔄 Simulateur de Remplacement ETF</h1>
         <p>Calculez la rentabilité du remplacement d'un ETF par un autre</p>
     </div>
     """, unsafe_allow_html=True)
@@ -274,15 +274,128 @@ def calculate_fees(amount, broker_name, grille_name, broker_structures):
     
     return 0
 
-def calculate_total_transaction_fees(sell_amount, buy_amount, broker_name, grille_name, broker_structures):
-    """Calcule les frais totaux : vente ETF1 + achat ETF2"""
+def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures):
+    """
+    Détermine le nombre optimal de parts ETF2 à acheter
+    en s'assurant que les liquidités restantes couvrent les frais d'achat
+    """
+    
+    # Vérification préliminaire : peut-on acheter au moins 1 part ?
+    if net_amount_after_sell < etf2_price:
+        return {
+            'etf2_shares': 0,
+            'purchase_amount': 0.0,
+            'buy_fees': 0.0,
+            'remaining_cash': net_amount_after_sell,
+            'total_cost': 0.0,
+            'impossible_purchase': True
+        }
+    
+    # Nombre maximum théorique de parts qu'on pourrait acheter
+    max_possible_shares = int(net_amount_after_sell / etf2_price)
+    
+    # On teste en partant du maximum et on descend jusqu'à trouver une solution viable
+    for etf2_shares in range(max_possible_shares, 0, -1):  # Commence à 1, pas 0
+        
+        # Montant nécessaire pour acheter ces parts
+        purchase_amount = etf2_shares * etf2_price
+        
+        # Frais d'achat pour ce montant
+        buy_fees = calculate_fees(purchase_amount, broker_name, grille_name, broker_structures)
+        
+        # Liquidités restantes après achat + frais
+        remaining_cash = net_amount_after_sell - purchase_amount - buy_fees
+        
+        # Si on a assez de liquidités (pas de découvert), c'est bon !
+        if remaining_cash >= 0:
+            return {
+                'etf2_shares': etf2_shares,
+                'purchase_amount': purchase_amount,
+                'buy_fees': buy_fees,
+                'remaining_cash': remaining_cash,
+                'total_cost': purchase_amount + buy_fees,
+                'impossible_purchase': False
+            }
+    
+    # Si même 1 part ne peut pas être achetée (frais trop élevés)
+    return {
+        'etf2_shares': 0,
+        'purchase_amount': 0.0,
+        'buy_fees': 0.0,
+        'remaining_cash': net_amount_after_sell,
+        'total_cost': 0.0,
+        'impossible_purchase': True
+    }
+
+def calculate_replacement_profitability(etf1_shares, etf1_price, etf1_expense, 
+                                      etf2_price, etf2_expense, broker_name, grille_name, broker_structures):
+    """
+    Calcule la rentabilité du remplacement avec la logique finale correcte
+    """
+    
+    # 1. Vente de tous les ETF1
+    sell_amount = etf1_shares * etf1_price
+    
+    # 2. Frais de vente
     sell_fees = calculate_fees(sell_amount, broker_name, grille_name, broker_structures)
-    buy_fees = calculate_fees(buy_amount, broker_name, grille_name, broker_structures)
+    
+    # 3. Montant net après vente
+    net_amount_after_sell = sell_amount - sell_fees
+    
+    # 4. Calcul optimal du nombre d'ETF2 à acheter
+    purchase_result = calculate_optimal_etf2_purchase(
+        net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures
+    )
+    
+    # 5. Gestion du cas où aucun achat n'est possible
+    if purchase_result.get('impossible_purchase', False):
+        return {
+            'sell_amount': sell_amount,
+            'sell_fees': sell_fees,
+            'net_after_sell': net_amount_after_sell,
+            'etf2_shares': 0,
+            'purchase_amount': 0.0,
+            'buy_fees': 0.0,
+            'remaining_cash': net_amount_after_sell,
+            'total_transaction_cost': sell_fees,  # Seulement les frais de vente
+            'annual_fee_etf1': 0.0,
+            'annual_fee_etf2': 0.0,
+            'annual_savings': 0.0,
+            'payback_years': float('inf'),
+            'payback_months': float('inf'),
+            'impossible_replacement': True,
+            'reason': f"Impossible d'acheter même 1 part ETF2 (prix: {etf2_price:.2f}€, disponible: {net_amount_after_sell:.2f}€)"
+        }
+    
+    # 6. Économie annuelle sur les frais de gestion (seulement si achat possible)
+    annual_fee_etf1 = sell_amount * (etf1_expense / 100)
+    annual_fee_etf2 = purchase_result['purchase_amount'] * (etf2_expense / 100)
+    annual_savings = annual_fee_etf1 - annual_fee_etf2
+    
+    # 7. Temps pour rentabiliser
+    total_transaction_cost = sell_fees + purchase_result['buy_fees']
+    if annual_savings > 0:
+        payback_years = total_transaction_cost / annual_savings
+        payback_months = payback_years * 12
+    else:
+        payback_years = float('inf')
+        payback_months = float('inf')
     
     return {
+        'sell_amount': sell_amount,
         'sell_fees': sell_fees,
-        'buy_fees': buy_fees,
-        'total_fees': sell_fees + buy_fees
+        'net_after_sell': net_amount_after_sell,
+        'etf2_shares': purchase_result['etf2_shares'],
+        'purchase_amount': purchase_result['purchase_amount'],
+        'buy_fees': purchase_result['buy_fees'],
+        'remaining_cash': purchase_result['remaining_cash'],
+        'total_transaction_cost': total_transaction_cost,
+        'annual_fee_etf1': annual_fee_etf1,
+        'annual_fee_etf2': annual_fee_etf2,
+        'annual_savings': annual_savings,
+        'payback_years': payback_years,
+        'payback_months': payback_months,
+        'impossible_replacement': False
     }
 
 def render_grille_display(grille_name, grille_data):
@@ -315,58 +428,6 @@ def render_grille_display(grille_name, grille_data):
     
     st.markdown("</div>", unsafe_allow_html=True)
 
-def calculate_replacement_profitability(etf1_shares, etf1_price, etf1_expense, 
-                                      etf2_price, etf2_expense, transaction_fees_breakdown):
-    """Calcule la rentabilité du remplacement avec frais détaillés"""
-    
-    # Montant de la vente ETF1
-    sell_amount = etf1_shares * etf1_price
-    
-    # Montant net après vente (montant - frais de vente)
-    net_amount_after_sell = sell_amount - transaction_fees_breakdown['sell_fees']
-    
-    # Pour le calcul des frais d'achat, on utilise le montant net disponible
-    # car c'est ce montant qui sera investi dans l'ETF2
-    buy_amount = net_amount_after_sell
-    
-    # Montant final disponible pour l'achat après déduction des frais d'achat
-    final_amount_for_purchase = net_amount_after_sell - transaction_fees_breakdown['buy_fees']
-    
-    # Nombre d'ETF2 qu'on peut acheter avec le montant final
-    etf2_shares = final_amount_for_purchase / etf2_price
-    
-    # Économie annuelle sur les frais de gestion
-    # ETF1 : basé sur le montant initial investi
-    annual_fee_etf1 = sell_amount * (etf1_expense / 100)
-    # ETF2 : basé sur le montant final investi après tous les frais
-    annual_fee_etf2 = final_amount_for_purchase * (etf2_expense / 100)
-    annual_savings = annual_fee_etf1 - annual_fee_etf2
-    
-    # Temps pour rentabiliser (en années)
-    total_transaction_cost = transaction_fees_breakdown['total_fees']
-    if annual_savings > 0:
-        payback_years = total_transaction_cost / annual_savings
-        payback_months = payback_years * 12
-    else:
-        payback_years = float('inf')
-        payback_months = float('inf')
-    
-    return {
-        'sell_amount': sell_amount,
-        'net_after_sell': net_amount_after_sell,
-        'buy_amount': buy_amount,
-        'final_amount_for_purchase': final_amount_for_purchase,
-        'sell_fees': transaction_fees_breakdown['sell_fees'],
-        'buy_fees': transaction_fees_breakdown['buy_fees'],
-        'total_transaction_cost': total_transaction_cost,
-        'etf2_shares': etf2_shares,
-        'annual_fee_etf1': annual_fee_etf1,
-        'annual_fee_etf2': annual_fee_etf2,
-        'annual_savings': annual_savings,
-        'payback_years': payback_years,
-        'payback_months': payback_months
-    }
-
 def main():
     load_custom_css()
     render_custom_header()
@@ -383,7 +444,7 @@ def main():
         st.error("Impossible de charger les données des courtiers")
         return
     
-    st.header("🎯 Configuration du Remplacement")
+    st.header("🎯 Configuration de l'Arbitrage")
     
     # Section ETFs
     st.subheader("📊 ETFs")
@@ -427,8 +488,9 @@ def main():
             st.metric("Frais gestion", f"{etf1_expense}%")
         else:
             st.metric("Frais gestion", "-%")
+            etf1_expense = 0
     
-    # ETF 2
+    # ETF 2 (SANS estimation des parts)
     col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
     
     with col1:
@@ -440,28 +502,20 @@ def main():
         )
     
     with col2:
-        if etf1_ticker and etf2_ticker and etf1_price > 0:
-            etf2_price = get_etf_price(etf2_ticker)
-            if etf2_price:
-                # Estimation approximative pour l'affichage (sera recalculée précisément plus tard)
-                sell_amount = etf1_shares * etf1_price
-                estimated_etf2_shares = (sell_amount * 0.95) / etf2_price  # Estimation avec 5% de frais
-                st.metric("Parts (estimé)", f"{estimated_etf2_shares:.2f}")
-            else:
-                st.metric("Parts", "N/A")
-                etf2_price = 0
-        else:
-            st.metric("Parts", "N/A")
-            etf2_price = 0
+        # Plus d'estimation des parts - sera calculé précisément après
+        st.metric("Parts", " X ")
     
     with col3:
         if etf2_ticker:
+            etf2_price = get_etf_price(etf2_ticker)
             if etf2_price:
                 st.metric("Prix", f"{etf2_price:.2f}€")
             else:
                 st.metric("Prix", "N/A")
+                etf2_price = 0
         else:
             st.metric("Prix", "N/A")
+            etf2_price = 0
     
     with col4:
         if etf2_ticker:
@@ -469,13 +523,14 @@ def main():
             st.metric("Frais gestion", f"{etf2_expense}%")
         else:
             st.metric("Frais gestion", "-%")
+            etf2_expense = 0
     
     # Saut de ligne
     st.markdown("---")
 
     st.subheader("🏦 Choix du Courtier")
     
-    col1, col2, col3, col4 = st.columns([3, 3, 1.5, 1.5])
+    col1, col2 = st.columns([3, 3])
     
     with col1:
         broker_names = list(broker_structures.keys())
@@ -505,26 +560,6 @@ def main():
             st.selectbox("Grille tarifaire", options=[], key="grille_select_empty")
             selected_grille = None
     
-    with col3:
-        if selected_broker and selected_grille and etf1_shares > 0 and etf1_price > 0:
-            sell_amount = etf1_shares * etf1_price
-            # Estimation approximative pour l'affichage
-            estimated_buy_amount = sell_amount * 0.95  # Estimation
-            fees_breakdown = calculate_total_transaction_fees(
-                sell_amount, estimated_buy_amount, selected_broker, selected_grille, broker_structures
-            )
-            total_fees = fees_breakdown['total_fees']
-            fee_percentage = (total_fees / sell_amount) * 100 if sell_amount > 0 else 0
-            st.metric("Frais totaux (%)", f"{fee_percentage:.2f}%")
-        else:
-            st.metric("Frais totaux (%)", "-%")
-    
-    with col4:
-        if selected_broker and selected_grille and etf1_shares > 0 and etf1_price > 0:
-            st.metric("Montant frais", f"{total_fees:.2f}€")
-        else:
-            st.metric("Montant frais", "0€")
-    
     # Saut de ligne
     st.markdown("---")
     
@@ -541,91 +576,139 @@ def main():
             st.error("Veuillez remplir tous les champs nécessaires")
             return
         
-        sell_amount = etf1_shares * etf1_price
-        
-        # Calcul itératif pour obtenir les bons frais
-        # Premier calcul approximatif
-        net_after_sell_approx = sell_amount * 0.95  # Estimation
-        fees_breakdown = calculate_total_transaction_fees(
-            sell_amount, net_after_sell_approx, selected_broker, selected_grille, broker_structures
-        )
-        
-        # Recalcul plus précis
-        net_after_sell_precise = sell_amount - fees_breakdown['sell_fees']
-        fees_breakdown_final = calculate_total_transaction_fees(
-            sell_amount, net_after_sell_precise, selected_broker, selected_grille, broker_structures
-        )
-        
+        # CALCUL AVEC LA LOGIQUE FINALE CORRECTE
         results = calculate_replacement_profitability(
-            etf1_shares, etf1_price, etfs_data[etf1_ticker]['expense_ratio'],
-            etf2_price, etfs_data[etf2_ticker]['expense_ratio'],
-            fees_breakdown_final
+            etf1_shares, etf1_price, etf1_expense,
+            etf2_price, etf2_expense,
+            selected_broker, selected_grille, broker_structures
         )
         
         st.markdown("---")
         st.header("📊 Résultats de l'Analyse")
         
-        # Métriques principales
-        col1, col2, col3, col4 = st.columns(4)
+        # Gestion du cas impossible
+        if results.get('impossible_replacement', False):
+            st.error("🚫 **REMPLACEMENT IMPOSSIBLE**")
+            st.error(f"**Raison :** {results['reason']}")
+            
+            # Affichage simplifié pour le cas impossible
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.metric(
+                    label="💰 Montant de vente",
+                    value=f"{results['sell_amount']:,.2f}€"
+                )
+            
+            with col2:
+                st.metric(
+                    label="💸 Frais de vente",
+                    value=f"{results['sell_fees']:,.2f}€"
+                )
+            
+            with col3:
+                st.metric(
+                    label="💵 Liquidité disponible",
+                    value=f"{results['net_after_sell']:,.2f}€"
+                )
+            
+            st.warning(f"💡 **Solution :** Augmentez le nombre de parts d'ETF1 ou choisissez un ETF2 moins cher (prix actuel: {etf2_price:.2f}€)")
+            return
+        
+        # Métriques principales (cas normal)
+        col1, col2, col3, col4, col5 = st.columns(5)
         
         with col1:
-            st.markdown("**💰 Montant de vente**")
-            st.markdown(f"# {results['sell_amount']:,.2f}€")
+            st.metric(
+                label="💰 Montant de vente",
+                value=f"{results['sell_amount']:,.2f}€"
+            )
         
         with col2:
-            st.markdown("**💸 Frais totaux**")
-            st.markdown(f"# {results['total_transaction_cost']:,.2f}€")
+            st.metric(
+                label="💸 Frais totaux",
+                value=f"{results['total_transaction_cost']:,.2f}€"
+            )
         
         with col3:
-            st.markdown("**📈 Économie annuelle**")
-            color = "🟢" if results['annual_savings'] > 0 else "🔴"
-            st.markdown(f"# {color} {results['annual_savings']:,.2f}€")
+            st.metric(
+                label="📈 Parts ETF2",
+                value=f"{results['etf2_shares']:.0f}"
+            )
         
         with col4:
-            st.markdown("**⏱️ Seuil de rentabilité**")
-            if results['payback_months'] != float('inf'):
-                if results['payback_months'] < 12:
-                    st.markdown(f"# {results['payback_months']:.1f} mois")
-                else:
-                    st.markdown(f"# {results['payback_years']:.1f} ans")
-            else:
-                st.markdown("# ❌ Jamais")
+            st.metric(
+                label="💵 Liquidité restante",
+                value=f"{results['remaining_cash']:,.2f}€"
+            )
         
-        # Détails de l'opération
+        with col5:
+            delta_color = "normal" if results['annual_savings'] > 0 else "inverse"
+            st.metric(
+                label="📈 Économie annuelle",
+                value=f"{results['annual_savings']:,.2f}€",
+                delta=f"{results['annual_savings']:+.2f}€" if results['annual_savings'] != 0 else None,
+                delta_color=delta_color
+            )
+        
+        # Seuil de rentabilité en ligne séparée
+        st.markdown("### ⏱️ Seuil de rentabilité")
+        if results['annual_savings'] > 0 and results['payback_months'] != float('inf'):
+            if results['payback_months'] < 12:
+                st.success(f"**Rentable en {results['payback_months']:.2f} mois**")
+            else:
+                st.info(f"**Rentable en {results['payback_years']:.2f} ans**")
+        else:
+            st.error("**❌ Jamais rentable**")
+
+        # Recommandation
+        if results['annual_savings'] > 0:     
+            if results['payback_months'] < 12:
+                st.success(f"✅ **Recommandation : REMPLACER** - Rentable en {results['payback_months']:.1f} mois")
+            elif results['payback_years'] < 3:
+                st.warning(f"⚠️ **Recommandation : À CONSIDÉRER** - Rentable en {results['payback_years']:.1f} ans")
+            else:
+                st.error(f"❌ **Recommandation : NE PAS REMPLACER** - Rentable seulement après {results['payback_years']:.1f} ans")
+        else:
+            st.error("❌ **Ce remplacement n'est jamais rentable** - L'ETF2 a des frais plus élevés que l'ETF1")
+        
+        # Détails de l'opération (CORRIGÉ)
         st.subheader("🔍 Détail de l'Opération")
         
         details_data = {
             "Élément": [
-                f"💼 Vente {etf1_shares:.2f} parts {etf1_ticker}",
+                f"💼 Vente {etf1_shares:.0f} parts {etf1_ticker}",
                 f"💸 Frais de vente",
                 f"💰 Net après vente",
-                f"💸 Frais d'achat",
-                f"💰 Montant final pour achat",
                 f"📊 Prix ETF2 ({etf2_ticker})",
-                f"📈 Parts ETF2 obtenues"
+                f"📈 Parts ETF2 optimales",
+                f"💰 Montant achat ETF2",
+                f"💸 Frais d'achat ETF2",
+                f"💵 Liquidité finale restante"
             ],
             "Montant": [
                 f"{results['sell_amount']:,.2f}€",
                 f"-{results['sell_fees']:,.2f}€",
                 f"{results['net_after_sell']:,.2f}€",
-                f"-{results['buy_fees']:,.2f}€",
-                f"{results['final_amount_for_purchase']:,.2f}€",
                 f"{etf2_price:.2f}€/part",
-                f"{results['etf2_shares']:.2f} parts"
+                f"{results['etf2_shares']:.0f} parts",
+                f"{results['purchase_amount']:,.2f}€",
+                f"-{results['buy_fees']:,.2f}€",
+                f"{results['remaining_cash']:,.2f}€"
             ]
         }
         
         details_df = pd.DataFrame(details_data)
         st.dataframe(details_df, use_container_width=True, hide_index=True)
         
-        # Résumé des frais
+        # Résumé des frais (CORRIGÉ)
         st.subheader("💸 Détail des Frais de Courtage")
         
         fees_summary_data = {
             "Type d'opération": ["Vente ETF1", "Achat ETF2", "Total"],
             "Montant de l'opération": [
                 f"{results['sell_amount']:,.2f}€",
-                f"{results['buy_amount']:,.2f}€",
+                f"{results['purchase_amount']:,.2f}€",
                 f"{results['sell_amount']:,.2f}€"
             ],
             "Frais": [
@@ -635,7 +718,7 @@ def main():
             ],
             "% du montant": [
                 f"{(results['sell_fees']/results['sell_amount']*100):.3f}%",
-                f"{(results['buy_fees']/results['buy_amount']*100):.3f}%",
+                f"{(results['buy_fees']/results['purchase_amount']*100 if results['purchase_amount'] > 0 else 0):.3f}%",
                 f"{(results['total_transaction_cost']/results['sell_amount']*100):.3f}%"
             ]
         }
@@ -643,20 +726,20 @@ def main():
         fees_summary_df = pd.DataFrame(fees_summary_data)
         st.dataframe(fees_summary_df, use_container_width=True, hide_index=True)
         
-        # Comparaison des frais annuels
+        # Comparaison des frais annuels (CORRIGÉ)
         st.subheader("📊 Comparaison des Frais Annuels")
         
         fees_data = {
             "ETF": [etf1_ticker, etf2_ticker, "Différence"],
             "Frais de gestion (%)": [
-                f"{etfs_data[etf1_ticker]['expense_ratio']}%",
-                f"{etfs_data[etf2_ticker]['expense_ratio']}%",
-                f"{etfs_data[etf1_ticker]['expense_ratio'] - etfs_data[etf2_ticker]['expense_ratio']:+.2f}%"
+                f"{etf1_expense}%",
+                f"{etf2_expense}%",
+                f"{etf1_expense - etf2_expense:+.2f}%"
             ],
             "Capital investi": [
                 f"{results['sell_amount']:,.2f}€",
-                f"{results['final_amount_for_purchase']:,.2f}€",
-                f"{results['sell_amount'] - results['final_amount_for_purchase']:+,.2f}€"
+                f"{results['purchase_amount']:,.2f}€",
+                f"{results['sell_amount'] - results['purchase_amount']:+,.2f}€"
             ],
             "Frais annuels (€)": [
                 f"{results['annual_fee_etf1']:,.2f}€",
@@ -667,18 +750,6 @@ def main():
         
         fees_df = pd.DataFrame(fees_data)
         st.dataframe(fees_df, use_container_width=True, hide_index=True)
-        
-        # Recommandation
-        st.subheader("🎯 Recommandation")
-        if results['annual_savings'] > 0:
-            if results['payback_months'] < 12:
-                st.success(f"✅ **Recommandation : REMPLACER** - Rentable en {results['payback_months']:.1f} mois")
-            elif results['payback_years'] < 6:
-                st.warning(f"⚠️ **Recommandation : À CONSIDÉRER** - Rentable en {results['payback_years']:.1f} ans")
-            else:
-                st.error(f"❌ **Recommandation : NE PAS REMPLACER** - Rentable seulement après {results['payback_years']:.1f} ans")
-        else:
-            st.error("❌ **Ce remplacement n'est jamais rentable** - L'ETF2 a des frais plus élevés que l'ETF1")
 
 if __name__ == "__main__":
     main()
