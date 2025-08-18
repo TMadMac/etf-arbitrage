@@ -7,7 +7,7 @@ import json
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Simulateur de Remplacement ETF",
+    page_title="Simulateur d'Arbitrage d'ETFs",
     page_icon="🔄",
     layout="wide"
 )
@@ -181,7 +181,7 @@ def load_custom_css():
 def render_custom_header():
     st.markdown("""
     <div class="custom-header">
-        <h1>🔄 Simulateur de Remplacement ETF</h1>
+        <h1>🔄 Simulateur d'Arbitrage d'ETFs</h1>
         <p>Calculez la rentabilité du remplacement d'un ETF par un autre</p>
     </div>
     """, unsafe_allow_html=True)
