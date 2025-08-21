@@ -7,12 +7,12 @@ import json
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Simulateur d'Arbitrage d'ETFs",
+    page_title="Simulateur d'Arbitrage d'ETFs - Tracking Difference",
     page_icon="🔄",
     layout="wide"
 )
 
-ETFS_FILE_PATH = "etfs.csv"
+ETFS_FILE_PATH = "etfs_TD.csv"
 BROKERS_FILE_PATH = "courtiers.json"
 
 def load_custom_css():
@@ -175,6 +175,31 @@ def load_custom_css():
         color: var(--primary-color);
         margin-bottom: 0.5rem;
     }
+    
+    /* TD indicators */
+    .td-positive {
+        background: #d4edda;
+        color: #155724;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+    
+    .td-negative {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+    
+    .td-neutral {
+        background: #e2e3e5;
+        color: #383d41;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -182,12 +207,12 @@ def render_custom_header():
     st.markdown("""
     <div class="custom-header">
         <h1>🔄 Simulateur d'Arbitrage d'ETFs</h1>
-        <p>Calculez la rentabilité du remplacement d'un ETF par un autre</p>
+        <p>Calculez la rentabilité basée sur la Tracking Difference réelle</p>
     </div>
     """, unsafe_allow_html=True)
 
 def load_etfs_data():
-    """Charge les données des ETFs depuis etfs.csv"""
+    """Charge les données des ETFs depuis etfs_TD.csv"""
     try:
         df = pd.read_csv(ETFS_FILE_PATH, delimiter=',')
         df['Ticker'] = df['Ticker'].str.strip()
@@ -197,6 +222,15 @@ def load_etfs_data():
         for _, row in df.iterrows():
             ticker = row['Ticker']
             
+            # Convertir la TD en nombre (les valeurs sont déjà en %, ex: "-2.011" = -2.011%)
+            td_str = str(row.get('Annualised_Tracking_Difference', '0')).strip()
+            td_str = td_str.replace(',', '.')  # Remplacer virgule par point
+            
+            try:
+                tracking_difference = float(td_str)  # Directement en %, pas besoin de conversion
+            except (ValueError, TypeError):
+                tracking_difference = 0.0
+            
             # Convertir les frais en nombre (gérer les virgules et pourcentages)
             frais_str = str(row.get('Frais', '0')).strip()
             if frais_str.endswith('%'):
@@ -204,14 +238,16 @@ def load_etfs_data():
             frais_str = frais_str.replace(',', '.')  # Remplacer virgule par point
             
             try:
-                expense_ratio = float(frais_str)
+                ter = float(frais_str)
             except (ValueError, TypeError):
-                expense_ratio = 0.0
+                ter = 0.0
             
             etf_info[ticker] = {
                 'name': row.get('Nom du fonds', 'Nom inconnu'),
-                'expense_ratio': expense_ratio,
-                'isin': row.get('ISIN', 'ISIN inconnu')
+                'tracking_difference': tracking_difference,
+                'ter': ter,
+                'isin': row.get('ISIN', 'ISIN inconnu'),
+                'index': row.get('Index', row.get('Réplication', 'Index inconnu'))  # Utiliser Réplication si Index n'existe pas
             }
         
         return etf_info
@@ -243,6 +279,15 @@ def get_etf_price(ticker):
     except Exception as e:
         st.error(f"Erreur lors de la récupération du prix pour {ticker}: {e}")
         return None
+
+def format_td_display(td_value):
+    """Formate l'affichage de la TD avec couleur appropriée"""
+    if td_value > 0:
+        return f'<span class="td-positive">+{td_value:.2f}%</span>'
+    elif td_value < 0:
+        return f'<span class="td-negative">{td_value:.2f}%</span>'
+    else:
+        return f'<span class="td-neutral">{td_value:.2f}%</span>'
 
 def calculate_fees(amount, broker_name, grille_name, broker_structures):
     """Calcule les frais selon la structure tarifaire"""
@@ -295,7 +340,7 @@ def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_na
     max_possible_shares = int(net_amount_after_sell / etf2_price)
     
     # On teste en partant du maximum et on descend jusqu'à trouver une solution viable
-    for etf2_shares in range(max_possible_shares, 0, -1):  # Commence à 1, pas 0
+    for etf2_shares in range(max_possible_shares, 0, -1):
         
         # Montant nécessaire pour acheter ces parts
         purchase_amount = etf2_shares * etf2_price
@@ -327,10 +372,10 @@ def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_na
         'impossible_purchase': True
     }
 
-def calculate_replacement_profitability(etf1_shares, etf1_price, etf1_expense, 
-                                      etf2_price, etf2_expense, broker_name, grille_name, broker_structures):
+def calculate_replacement_profitability_td(etf1_shares, etf1_price, etf1_td, 
+                                         etf2_price, etf2_td, broker_name, grille_name, broker_structures):
     """
-    Calcule la rentabilité du remplacement avec la logique finale correcte
+    Calcule la rentabilité du remplacement basée sur la Tracking Difference
     """
     
     # 1. Vente de tous les ETF1
@@ -357,25 +402,27 @@ def calculate_replacement_profitability(etf1_shares, etf1_price, etf1_expense,
             'purchase_amount': 0.0,
             'buy_fees': 0.0,
             'remaining_cash': net_amount_after_sell,
-            'total_transaction_cost': sell_fees,  # Seulement les frais de vente
-            'annual_fee_etf1': 0.0,
-            'annual_fee_etf2': 0.0,
-            'annual_savings': 0.0,
+            'total_transaction_cost': sell_fees,
+            'annual_performance_etf1': 0.0,
+            'annual_performance_etf2': 0.0,
+            'annual_performance_gain': 0.0,
             'payback_years': float('inf'),
             'payback_months': float('inf'),
             'impossible_replacement': True,
             'reason': f"Impossible d'acheter même 1 part ETF2 (prix: {etf2_price:.2f}€, disponible: {net_amount_after_sell:.2f}€)"
         }
     
-    # 6. Économie annuelle sur les frais de gestion (seulement si achat possible)
-    annual_fee_etf1 = sell_amount * (etf1_expense / 100)
-    annual_fee_etf2 = purchase_result['purchase_amount'] * (etf2_expense / 100)
-    annual_savings = annual_fee_etf1 - annual_fee_etf2
+    # 6. Gain annuel basé sur la TD (seulement si achat possible)
+    # Les valeurs TD sont déjà en %, donc on divise par 100 pour les calculs
+    # TD positive = surperformance du benchmark
+    annual_performance_etf1 = sell_amount * (etf1_td / 100)
+    annual_performance_etf2 = purchase_result['purchase_amount'] * (etf2_td / 100)
+    annual_performance_gain = annual_performance_etf2 - annual_performance_etf1
     
     # 7. Temps pour rentabiliser
     total_transaction_cost = sell_fees + purchase_result['buy_fees']
-    if annual_savings > 0:
-        payback_years = total_transaction_cost / annual_savings
+    if annual_performance_gain > 0:
+        payback_years = total_transaction_cost / annual_performance_gain
         payback_months = payback_years * 12
     else:
         payback_years = float('inf')
@@ -390,9 +437,9 @@ def calculate_replacement_profitability(etf1_shares, etf1_price, etf1_expense,
         'buy_fees': purchase_result['buy_fees'],
         'remaining_cash': purchase_result['remaining_cash'],
         'total_transaction_cost': total_transaction_cost,
-        'annual_fee_etf1': annual_fee_etf1,
-        'annual_fee_etf2': annual_fee_etf2,
-        'annual_savings': annual_savings,
+        'annual_performance_etf1': annual_performance_etf1,
+        'annual_performance_etf2': annual_performance_etf2,
+        'annual_performance_gain': annual_performance_gain,
         'payback_years': payback_years,
         'payback_months': payback_months,
         'impossible_replacement': False
@@ -450,14 +497,14 @@ def main():
     st.subheader("📊 ETFs")
     
     # ETF 1
-    col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
+    col1, col2, col3, col4, col5 = st.columns([3, 1.2, 1.2, 1.2, 1.2])
     
     with col1:
         etf_tickers = [""] + list(etfs_data.keys())
         etf1_ticker = st.selectbox(
             "ETF 1 (à remplacer)",
             options=etf_tickers,
-            format_func=lambda x: f"{x} ({etfs_data.get(x, {}).get('isin', 'N/A')}) - {etfs_data.get(x, {}).get('name', 'N/A')}" if x else "-- Sélectionnez un ETF --",
+            format_func=lambda x: f"{x} - {etfs_data.get(x, {}).get('isin', 'N/A')} - {etfs_data.get(x, {}).get('name', 'N/A')}" if x else "-- Sélectionnez un ETF --",
             key="etf1_select"
         )
     
@@ -484,25 +531,38 @@ def main():
     
     with col4:
         if etf1_ticker:
-            etf1_expense = etfs_data[etf1_ticker]['expense_ratio']
-            st.metric("Frais gestion", f"{etf1_expense}%")
+            etf1_td = etfs_data[etf1_ticker]['tracking_difference']
+            st.markdown("**TD Annualisée**")
+            st.markdown(format_td_display(etf1_td), unsafe_allow_html=True)
         else:
-            st.metric("Frais gestion", "-%")
-            etf1_expense = 0
+            st.markdown("**TD Annualisée**")
+            st.markdown("N/A")
+            etf1_td = 0
     
-    # ETF 2 (SANS estimation des parts)
-    col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
+    with col5:
+        if etf1_ticker:
+            etf1_ter = etfs_data[etf1_ticker]['ter']
+            st.metric("TER", f"{etf1_ter:.2f}%")
+        else:
+            st.metric("TER", "N/A")
+            etf1_ter = 0
+    
+    # Affichage des détails ETF1
+    if etf1_ticker:
+        st.caption(f"**Réplication :** {etfs_data[etf1_ticker]['index']} | **ISIN :** {etfs_data[etf1_ticker]['isin']}")
+    
+    # ETF 2
+    col1, col2, col3, col4, col5 = st.columns([3, 1.2, 1.2, 1.2, 1.2])
     
     with col1:
         etf2_ticker = st.selectbox(
             "ETF 2 (remplacement)",
             options=etf_tickers,
-            format_func=lambda x: f"{x} ({etfs_data.get(x, {}).get('isin', 'N/A')}) - {etfs_data.get(x, {}).get('name', 'N/A')}" if x else "-- Sélectionnez un ETF --",
+            format_func=lambda x: f"{x} - {etfs_data.get(x, {}).get('isin', 'N/A')} - {etfs_data.get(x, {}).get('name', 'N/A')}" if x else "-- Sélectionnez un ETF --",
             key="etf2_select"
         )
     
     with col2:
-        # Plus d'estimation des parts - sera calculé précisément après
         st.metric("Parts", " X ")
     
     with col3:
@@ -519,11 +579,35 @@ def main():
     
     with col4:
         if etf2_ticker:
-            etf2_expense = etfs_data[etf2_ticker]['expense_ratio']
-            st.metric("Frais gestion", f"{etf2_expense}%")
+            etf2_td = etfs_data[etf2_ticker]['tracking_difference']
+            st.markdown("**TD Annualisée**")
+            st.markdown(format_td_display(etf2_td), unsafe_allow_html=True)
         else:
-            st.metric("Frais gestion", "-%")
-            etf2_expense = 0
+            st.markdown("**TD Annualisée**")
+            st.markdown("N/A")
+            etf2_td = 0
+    
+    with col5:
+        if etf2_ticker:
+            etf2_ter = etfs_data[etf2_ticker]['ter']
+            st.metric("TER", f"{etf2_ter:.2f}%")
+        else:
+            st.metric("TER", "N/A")
+            etf2_ter = 0
+    
+    # Affichage des détails ETF2
+    if etf2_ticker:
+        st.caption(f"**Réplication :** {etfs_data[etf2_ticker]['index']} | **ISIN :** {etfs_data[etf2_ticker]['isin']}")
+    
+    # Comparaison rapide TD
+    if etf1_ticker and etf2_ticker:
+        td_difference = etf2_td - etf1_td
+        if td_difference > 0:
+            st.success(f"🚀 ETF2 a une TD supérieure de **+{td_difference:.2f}%** par rapport à ETF1")
+        elif td_difference < 0:
+            st.warning(f"⚠️ ETF2 a une TD inférieure de **{td_difference:.2f}%** par rapport à ETF1")
+        else:
+            st.info("➡️ Les deux ETFs ont la même TD")
     
     # Saut de ligne
     st.markdown("---")
@@ -560,9 +644,6 @@ def main():
             st.selectbox("Grille tarifaire", options=[], key="grille_select_empty")
             selected_grille = None
     
-    # Saut de ligne
-    st.markdown("---")
-    
     # Affichage de la grille sélectionnée
     if selected_broker and selected_grille:
         st.markdown("**📋 Grille tarifaire sélectionnée :**")
@@ -576,10 +657,10 @@ def main():
             st.error("Veuillez remplir tous les champs nécessaires")
             return
         
-        # CALCUL AVEC LA LOGIQUE FINALE CORRECTE
-        results = calculate_replacement_profitability(
-            etf1_shares, etf1_price, etf1_expense,
-            etf2_price, etf2_expense,
+        # CALCUL AVEC LA LOGIQUE TD
+        results = calculate_replacement_profitability_td(
+            etf1_shares, etf1_price, etf1_td,
+            etf2_price, etf2_td,
             selected_broker, selected_grille, broker_structures
         )
         
@@ -643,17 +724,17 @@ def main():
             )
         
         with col5:
-            delta_color = "normal" if results['annual_savings'] > 0 else "inverse"
+            delta_color = "normal" if results['annual_performance_gain'] > 0 else "inverse"
             st.metric(
-                label="📈 Économie annuelle",
-                value=f"{results['annual_savings']:,.2f}€",
-                delta=f"{results['annual_savings']:+.2f}€" if results['annual_savings'] != 0 else None,
+                label="📈 Gain de performance annuel",
+                value=f"{results['annual_performance_gain']:,.2f}€",
+                delta=f"{results['annual_performance_gain']:+.2f}€" if results['annual_performance_gain'] != 0 else None,
                 delta_color=delta_color
             )
         
         # Seuil de rentabilité en ligne séparée
         st.markdown("### ⏱️ Seuil de rentabilité")
-        if results['annual_savings'] > 0 and results['payback_months'] != float('inf'):
+        if results['annual_performance_gain'] > 0 and results['payback_months'] != float('inf'):
             if results['payback_months'] < 12:
                 st.success(f"**Rentable en {results['payback_months']:.2f} mois**")
             else:
@@ -661,18 +742,18 @@ def main():
         else:
             st.error("**❌ Jamais rentable**")
 
-        # Recommandation
-        if results['annual_savings'] > 0:     
+        # Recommandation basée sur la TD
+        if results['annual_performance_gain'] > 0:     
             if results['payback_months'] < 12:
-                st.success(f"✅ **Recommandation : REMPLACER** - Rentable en {results['payback_months']:.1f} mois")
+                st.success(f"✅ **Recommandation : REMPLACER** - Rentable en {results['payback_months']:.1f} mois grâce à la meilleure TD")
             elif results['payback_years'] < 3:
                 st.warning(f"⚠️ **Recommandation : À CONSIDÉRER** - Rentable en {results['payback_years']:.1f} ans")
             else:
                 st.error(f"❌ **Recommandation : NE PAS REMPLACER** - Rentable seulement après {results['payback_years']:.1f} ans")
         else:
-            st.error("❌ **Ce remplacement n'est jamais rentable** - L'ETF2 a des frais plus élevés que l'ETF1")
+            st.error("❌ **Ce remplacement n'est jamais rentable** - L'ETF2 a une TD moins favorable que l'ETF1")
         
-        # Détails de l'opération (CORRIGÉ)
+        # Détails de l'opération
         st.subheader("🔍 Détail de l'Opération")
         
         details_data = {
@@ -701,7 +782,7 @@ def main():
         details_df = pd.DataFrame(details_data)
         st.dataframe(details_df, use_container_width=True, hide_index=True)
         
-        # Résumé des frais (CORRIGÉ)
+        # Résumé des frais de courtage
         st.subheader("💸 Détail des Frais de Courtage")
         
         fees_summary_data = {
@@ -726,30 +807,35 @@ def main():
         fees_summary_df = pd.DataFrame(fees_summary_data)
         st.dataframe(fees_summary_df, use_container_width=True, hide_index=True)
         
-        # Comparaison des frais annuels (CORRIGÉ)
-        st.subheader("📊 Comparaison des Frais Annuels")
+        # Comparaison des Tracking Differences
+        st.subheader("📊 Comparaison des Tracking Differences")
         
-        fees_data = {
+        td_data = {
             "ETF": [etf1_ticker, etf2_ticker, "Différence"],
-            "Frais de gestion (%)": [
-                f"{etf1_expense}%",
-                f"{etf2_expense}%",
-                f"{etf1_expense - etf2_expense:+.2f}%"
+            "Tracking Difference (%)": [
+                f"{etf1_td:+.2f}%",
+                f"{etf2_td:+.2f}%",
+                f"{etf2_td - etf1_td:+.2f}%"
             ],
             "Capital investi": [
                 f"{results['sell_amount']:,.2f}€",
                 f"{results['purchase_amount']:,.2f}€",
                 f"{results['sell_amount'] - results['purchase_amount']:+,.2f}€"
             ],
-            "Frais annuels (€)": [
-                f"{results['annual_fee_etf1']:,.2f}€",
-                f"{results['annual_fee_etf2']:,.2f}€",
-                f"{results['annual_savings']:+,.2f}€"
+            "Performance annuelle estimée": [
+                f"{results['annual_performance_etf1']:+,.2f}€",
+                f"{results['annual_performance_etf2']:+,.2f}€",
+                f"{results['annual_performance_gain']:+,.2f}€"
+            ],
+            "TER (pour info)": [
+                f"{etf1_ter:.2f}%",
+                f"{etf2_ter:.2f}%",
+                f"{etf2_ter - etf1_ter:+.2f}%"
             ]
         }
         
-        fees_df = pd.DataFrame(fees_data)
-        st.dataframe(fees_df, use_container_width=True, hide_index=True)
-
+        td_df = pd.DataFrame(td_data)
+        st.dataframe(td_df, use_container_width=True, hide_index=True)
+        
 if __name__ == "__main__":
     main()
