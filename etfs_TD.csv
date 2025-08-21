@@ -255,7 +255,6 @@ UNIC.L,Amundi MSCI Disruptive Technology UCITS ETF Acc,"0,45%",Capitalisation,R�
 DIGE.L,Amundi MSCI Digital Economy UCITS ETF Acc,"0,45%",Capitalisation,Réplication complète,LU2023678878,-0.761
 PSPH.PA,Amundi PEA S&P 500 UCITS ETF EUR Hedged Acc,"0,12%",Capitalisation,Basée sur swap non financé,FR0011871136,0.11
 FMI.PA,Amundi Italy MIB ESG UCITS ETF,"0,18%",Capitalisation,Réplication complète,LU1681037518,0.144
-DCAM.PA,Amundi PEA Monde (MSCI World) UCITS ETF Acc,"0,20%",Capitalisation,Basée sur swap non financé,FR001400U5Q4,-inf
 CU2U.L,Amundi PEA MSCI USA ESG Leaders UCITS ETF USD,"0,35%",Capitalisation,Réplication complète,LU1681042948,-0.178
 LHKG.DE,Amundi MSCI China ESG Selection Extra UCITS ETF Dist,"0,65%",Distribution,Réplication complète,LU1900067940,-0.856
 UBBB.MI,Amundi Global Corporate SRI 1-5Y UCITS ETF DR (C),"0,20%",Capitalisation,Échantillonnage,LU1525418726,-0.285
@@ -519,14 +518,12 @@ ETSZ.DE,BNP Paribas Easy STOXX Europe 600 UCITS ETF,"0,18%",Capitalisation,Basé
 EMWE.DE,BNP Paribas Easy MSCI World SRI S-Series PAB 5% Capped UCITS ETF EUR Acc,"0,26%",Capitalisation,Réplication complète,LU1615092217,-0.1741
 EEMU.PA,BNP Paribas Easy MSCI EMU Min TE UCITS ETF,"0,15%",Capitalisation,Réplication complète,LU1291098827,0.2551
 EEMK.PA,BNP Paribas Easy MSCI Emerging Min TE UCITS ETF,"0,27%",Capitalisation,Réplication complète,LU1291097779,-0.9061
-ETDD.PA,BNP Paribas Easy EURO STOXX 50 UCITS ETF,"0,10%",Capitalisation,Réplication complète,FR0012739431,ERROR_DATA
 ECN.PA,BNP Paribas Easy Low Carbon 100 Europe PAB UCITS ETF,"0,30%",Capitalisation,Réplication complète,LU1377382368,-0.2015
 SPEEU.PA,BNP Paribas Easy S&P 500 Scored and Screened UCITS ETF EUR Acc,"0,13%",Capitalisation,Réplication complète,IE0004J37T45,0.0731
 EMEC.DE,BNP Paribas Easy ECPI Circular Economy Leaders UCITS ETF EUR,"0,30%",Capitalisation,Réplication complète,LU1953136527,-0.1574
 GEU3C.PA,BNP Paribas Easy JPM ESG EMU Government Bond IG 1-3Y UCITS ETF Capitalisation,"0,15%",Capitalisation,Réplication complète,LU2533810862,-0.1512
 WEMT2.PA,BNP Paribas Easy MSCI World Min TE UCITS ETF EUR Acc,"0,16%",Capitalisation,Réplication complète,IE000W8HP9L8,-0.0471
 ASRF.DE,BNP Paribas Easy EUR High Yield SRI Fossil Free UCITS ETF Acc,"0,25%",Capitalisation,Réplication complète,LU2244386053,-0.4167
-AUSSR.PA,BNP Paribas Easy Sustainable US UCITS ETF EUR R Acc,"0,20%",Capitalisation,Réplication complète,IE000LIYGB49,ERROR_DATA
 AJASR.PA,BNP Paribas Easy Sustainable Japan UCITS ETF EUR R Acc,"0,20%",Capitalisation,Réplication complète,IE0000SS94R1,0.114
 ENG.PA,BNP Paribas Easy ECPI Global ESG Infrastructure UCITS ETF EUR Capitalisation,"0,31%",Capitalisation,Réplication complète,IE000FF2EBQ8,-0.4755
 ESDD.PA,BNP Paribas Easy S&P 500 UCITS ETF,"0,13%",Distribution,Basée sur swap non financé,FR0011550680,0.3935
@@ -535,15 +532,12 @@ E40.PA,BNP Paribas Easy CAC 40 ESG UCITS ETF,"0,25%",Distribution,Réplication c
 EMBH.PA,BNP Paribas Easy JPM ESG EMBI Global Diversified Composite UCITS ETF EUR Hedged,"0,26%",Capitalisation,Réplication complète,LU1547515137,0.1839
 ETZD.PA,BNP Paribas Easy STOXX Europe 600 UCITS ETF,"0,18%",Distribution,Basée sur swap non financé,FR0011550672,0.1093
 EMBI.PA,BNP Paribas Easy JPM ESG EMBI Global Diversified Composite UCITS ETF,"0,26%",Capitalisation,Réplication complète,LU1547515053,0.1942
-LM9C.DE,BNP Paribas Easy Sustainable World UCITS ETF EUR Capitalisation,"0,20%",Capitalisation,Réplication complète,IE0007QB4QS2,ERROR_DATA
 ETBB.PA,BNP Paribas Easy EURO STOXX 50 UCITS ETF,"0,10%",Distribution,Réplication complète,FR0012740983,0.5148
 BSRIC.PA,BNP Paribas Easy EUR Aggregate Bond SRI Fossil Free UCITS ETF Capitalisation,"0,15%",Capitalisation,Réplication complète,LU2533812991,-0.1309
 SRIUC.PA,BNP Paribas Easy EUR Corporate Bond SRI Fossil Free Ultrashort Duration UCITS ETF Acc,"0,10%",Capitalisation,Réplication complète,LU2533812058,-0.1317
 SPEUS.PA,BNP Paribas Easy S&P 500 Scored and Screened UCITS ETF Acc,"0,13%",Capitalisation,Réplication complète,IE0000VX9GN7,0.0721
 EPEJ.PA,BNP Paribas Easy MSCI Pacific ex Japan Min TE UCITS ETF,"0,15%",Capitalisation,Réplication complète,LU1291106356,-0.2406
-AUSSE.PA,BNP Paribas Easy Sustainable US UCITS ETF EUR Acc,"0,20%",Capitalisation,Réplication complète,IE0000LVTJ08,ERROR_DATA
 IM2A.DE,BNP Paribas Easy FTSE EPRA/NAREIT Eurozone Capped UCITS ETF QD,"0,40%",Distribution,Réplication complète,LU0192223062,1.3307
-EDEG.DE,BNP Paribas Easy EUR Overnight UCITS ETF Acc,"0,05%",Capitalisation,Basée sur swap,LU3025345516,ERROR_DATA
 ZSRI.DE,BNP Paribas Easy MSCI Europe SRI S-Series PAB 5% Capped UCITS ETF EUR Dis,"0,25%",Distribution,Réplication complète,LU1753045415,0.0686
 SEUGB.MI,BNP Paribas Easy Sustainable EUR Government Bond UCITS ETF Capitalisation,"0,12%",Capitalisation,Réplication complète,LU2697597552,-0.141
 EKUS.PA,BNP Paribas Easy MSCI USA SRI S-Series PAB 5% Capped UCITS ETF EUR Dis,"0,25%",Distribution,Réplication complète,LU1659681669,-0.2524
@@ -556,7 +550,6 @@ WEMTE.PA,BNP Paribas Easy MSCI World Min TE UCITS ETF USD Acc,"0,16%",Capitalisa
 SEUCB.MI,BNP Paribas Easy Sustainable EUR Corporate Bond UCITS ETF Capitalisation,"0,18%",Capitalisation,Réplication complète,LU2697596745,-0.3066
 EMWD.PA,BNP Paribas Easy MSCI World SRI S-Series PAB 5% Capped UCITS ETF EUR Dist,"0,26%",Distribution,Réplication complète,LU2641925016,-0.212
 GSCU.PA,BNP Paribas Easy Energy & Metals Enhanced Roll UCITS ETF USD,"0,39%",Capitalisation,Basée sur swap non financé,LU1291109533,-0.6819
-GUARD.PA,BNP Paribas Easy Bloomberg Europe Defense UCITS ETF Acc,"0,18%",Capitalisation,Réplication complète,LU3047998896,ERROR_DATA
 LU1659681586.SG,BNP Paribas Easy MSCI USA SRI S-Series PAB 5% Capped UCITS ETF EUR Acc,"0,25%",Capitalisation,Réplication complète,LU1659681586,-0.2007
 GREAL.PA,BNP Paribas Easy FTSE EPRA Nareit Developed Europe Green CTB UCITS ETF Acc,"0,41%",Capitalisation,Réplication complète,LU2008763935,0.1261
 BJLJ.DE,BNP Paribas Easy USD Corporate Bond SRI Fossil Free UCITS ETF Acc,"0,20%",Capitalisation,Réplication complète,LU2616774076,-0.1081
@@ -566,7 +559,6 @@ BIODV.PA,BNP Paribas Easy ESG Eurozone Biodiversity Leaders PAB UCITS ETF,"0,35%
 EJAH.PA,BNP Paribas Easy MSCI Japan Min TE UCITS ETF EUR Hedged,"0,16%",Capitalisation,Réplication complète,LU1481203070,-0.0606
 LU2244387887.SG,BNP Paribas Easy ESG Growth Europe UCITS ETF Acc,"0,31%",Capitalisation,Basée sur swap non financé,LU2244387887,-0.3523
 EVOE.PA,BNP Paribas Easy ESG Low Volatility Europe UCITS ETF,"0,31%",Capitalisation,Basée sur swap non financé,LU1377381717,-0.3254
-BJL9.DE,BNP Paribas Easy JPM ESG EMU Government Bond IG 5-7Y UCITS ETF (Acc),"0,08%",Capitalisation,Réplication complète,LU2993392898,ERROR_DATA
 EWRD.PA,BNP Paribas Easy MSCI World SRI S-Series PAB 5% Capped UCITS ETF USD Acc,"0,26%",Capitalisation,Réplication complète,LU1291108642,-0.203
 EMSR.PA,BNP Paribas Easy MSCI Emerging SRI S-Series PAB 5% Capped UCITS ETF USD Acc,"0,31%",Capitalisation,Réplication complète,LU1291098314,-0.7061
 EVAE.PA,BNP Paribas Easy ESG Value Europe UCITS ETF,"0,30%",Capitalisation,Basée sur swap non financé,LU1377382285,-0.3208
@@ -580,33 +572,25 @@ SRIC7.PA,BNP Paribas Easy EUR Corporate Bond SRI Fossil Free 7-10Y UCITS ETF Acc
 GOV10.PA,BNP Paribas Easy JPM ESG EMU Government Bond IG 10Y+ UCITS ETF Acc,"0,15%",Capitalisation,Réplication complète,LU2742533636,-0.0555
 LCWLD.PA,BNP Paribas Easy Low Carbon 300 World PAB UCITS ETF Acc,"0,31%",Capitalisation,Réplication complète,LU2194449075,-0.2112
 ECND.PA,BNP Paribas Easy Low Carbon 100 Europe PAB UCITS ETF Dist,"0,30%",Distribution,Réplication complète,LU1377382442,-0.0138
-WEWEU.PA,BNP Paribas Easy MSCI World Equal Weight Select UCITS ETF EUR Acc,"0,20%",Capitalisation,Réplication complète,IE0008D0AIU9,ERROR_DATA
 EDEU.PA,BNP Paribas Easy ESG Dividend Europe UCITS ETF,"0,31%",Capitalisation,Basée sur swap non financé,LU1615090864,-0.3607
 SPEUH.PA,BNP Paribas Easy S&P 500 Scored and Screened UCITS ETF EUR Hedged Acc,"0,13%",Capitalisation,Réplication complète,IE000Q6C8036,-0.1441
 GRCTB.MI,BNP Paribas Easy FTSE EPRA Nareit Global Developed Green CTB UCITS ETF EUR Acc,"0,41%",Capitalisation,Réplication complète,IE0007YP0PL1,-0.215
 GSSBO.PA,BNP Paribas Easy JPM ESG Green Social & Sustainability IG EUR Bond UCITS ETF Dist,"0,25%",Distribution,Réplication complète,LU2365458731,-0.2835
 PAACU.PA,BNP Paribas Easy MSCI ACWI SRI S-Series PAB 5% Capped UCITS ETF USD C,"0,20%",Capitalisation,Réplication complète,IE000WQ5O293,-0.186
-ESAG.DE,BNP Paribas Easy MSCI USA Small Cap Min TE UCITS ETF EUR Acc,"0,25%",Capitalisation,Réplication complète,IE00050J4789,ERROR_DATA
 SRIJC.PA,BNP Paribas Easy MSCI Japan SRI S-Series PAB 5% Capped UCITS ETF EUR Acc,"0,26%",Capitalisation,Réplication complète,LU1753045845,-0.3101
 SRIJ.PA,BNP Paribas Easy MSCI Japan SRI S-Series PAB 5% Capped UCITS ETF EUR Dis,"0,26%",Distribution,Réplication complète,LU1753045928,-0.3082
-ESAH.DE,BNP Paribas Easy MSCI USA Small Cap Min TE UCITS ETF USD Acc,"0,25%",Capitalisation,Réplication complète,IE000ZME9TM4,ERROR_DATA
-GREAD.PA,BNP Paribas Easy FTSE EPRA Nareit Developed Europe Green CTB UCITS ETF QD Dist,"0,41%",Distribution,Réplication complète,LU2914558916,ERROR_DATA
-ESAF.DE,BNP Paribas Easy MSCI World Equal Weight Select UCITS ETF USD Acc,"0,20%",Capitalisation,Réplication complète,IE000ALI2E45,ERROR_DATA
 SRIC6.PA,BNP Paribas Easy EUR Corporate Bond SRI PAB 3-5Y UCITS ETF,"0,15%",Capitalisation,Réplication complète,LU2446383338,-0.2384
 LU2365458145.SG,BNP Paribas Easy ECPI Global ESG Hydrogen Economy UCITS ETF EUR,"0,31%",Capitalisation,Réplication complète,LU2365458145,0.0036
 CHINU.PA,BNP Paribas Easy MSCI China Min TE UCITS ETF USD Acc,"0,27%",Capitalisation,Réplication complète,LU2314312922,-0.3727
 PAACE.MI,BNP Paribas Easy MSCI ACWI SRI S-Series PAB 5% Capped UCITS ETF EUR C,"0,20%",Capitalisation,Réplication complète,IE0004HBJKG0,-0.1861
 LU2244386137.SG,BNP Paribas Easy EUR High Yield SRI Fossil Free UCITS ETF Dis,"0,25%",Distribution,Réplication complète,LU2244386137,-0.4087
-AWDS.SW,BNP Paribas Easy Sustainable World UCITS ETF USD Capitalisation,"0,20%",Capitalisation,Réplication complète,IE000629MKR4,ERROR_DATA
 GEU3D.PA,BNP Paribas Easy JPM ESG EMU Government Bond IG 1-3Y UCITS ETF Distribution,"0,15%",Distribution,Réplication complète,LU2533810789,-0.1506
 SRIUD.PA,BNP Paribas Easy EUR Corporate Bond SRI Fossil Free Ultrashort Duration UCITS ETF Dist,"0,10%",Distribution,Réplication complète,LU2533811910,-0.1314
 MEDTE.PA,BNP Paribas Easy ECPI Global ESG Med Tech UCITS ETF EUR,"0,31%",Capitalisation,Réplication complète,LU2365457410,-0.2378
-LU2881684745.SG,BNP Paribas Easy Sustainable Europe UCITS ETF Acc,"0,20%",Capitalisation,Réplication complète,LU2881684745,ERROR_DATA
 VLED.PA,BNP Paribas Easy ESG Low Volatility Europe UCITS ETF,"0,31%",Distribution,Basée sur swap non financé,LU1481201025,-0.3152
 QUED.PA,BNP Paribas Easy ESG Quality Europe UCITS ETF,"0,31%",Distribution,Basée sur swap non financé,LU1481201611,-0.3213
 VALD.PA,BNP Paribas Easy ESG Value Europe UCITS ETF,"0,30%",Distribution,Basée sur swap non financé,LU1481201702,-0.3101
 BJLZ.DE,BNP Paribas Easy Sustainable EUR Corporate Bond December 2029 UCITS ETF Dist,"0,12%",Distribution,Réplication complète,LU2823896738,-0.2031
-EDEF.DE,BNP Paribas Easy Bloomberg Europe Defense UCITS ETF Dist,"0,18%",Distribution,Réplication complète,LU3047998979,ERROR_DATA
 BSRID.PA,BNP Paribas Easy EUR Aggregate Bond SRI Fossil Free UCITS ETF Distribution,"0,15%",Distribution,Réplication complète,LU2533812728,-0.1314
 LCDE.DE,BNP Paribas Easy Low Carbon 100 Eurozone PAB UCITS ETF Cap EUR,"0,30%",Capitalisation,Réplication complète,LU2194448267,-0.01
 LU2697596828.SG,BNP Paribas Easy Sustainable EUR Corporate Bond UCITS ETF Distribution,"0,18%",Distribution,Réplication complète,LU2697596828,-0.307
@@ -620,15 +604,9 @@ BLUSD.PA,BNP Paribas Easy ECPI Global ESG Blue Economy UCITS ETF USD,"0,31%",Cap
 HYDUS.PA,BNP Paribas Easy ECPI Global ESG Hydrogen Economy UCITS ETF USD,"0,31%",Capitalisation,Réplication complète,LU2533813023,-0.0013
 USCBD.PA,BNP Paribas Easy USD Corporate Bond SRI Fossil Free UCITS ETF Dist,"0,20%",Distribution,Réplication complète,LU2616776444,-0.1078
 MTUSD.PA,BNP Paribas Easy ECPI Global ESG Med Tech UCITS ETF USD,"0,31%",Capitalisation,Réplication complète,LU2533811084,-0.2632
-BJL1.DE,BNP Paribas Easy JPM ESG EMBI Global Diversified Composite UCITS ETF CHF Hedged,"0,26%",Capitalisation,Réplication complète,LU2868143954,ERROR_DATA
 LCEUD.PA,BNP Paribas Easy Low Carbon 100 Europe PAB UCITS ETF SD Dist,"0,30%",Distribution,Réplication complète,LU2777377875,0.0734
 BJLB.DE,BNP Paribas Easy ECPI Global ESG Infrastructure UCITS ETF USD Capitalisation,"0,31%",Capitalisation,Réplication complète,IE0006O3TTP9,0.0563
-LU2993390843.SG,BNP Paribas Easy S&P 500 II UCITS ETF EUR Hedged (Acc),"0,08%",Capitalisation,Basée sur swap,LU2993390843,ERROR_DATA
-SPTRE.PA,BNP Paribas Easy S&P 500 II UCITS ETF EUR (Acc),"0,08%",Capitalisation,Basée sur swap,LU2993390769,ERROR_DATA
-AUSSD.PA,BNP Paribas Easy Sustainable US UCITS ETF USD Acc,"0,20%",Capitalisation,Réplication complète,IE000130VPV5,ERROR_DATA
 BJLQ.DE,BNP Paribas Easy Sustainable EUR Government Bond UCITS ETF Distribution,"0,12%",Distribution,Réplication complète,LU2697597719,-0.1414
-BJL2.DE,BNP Paribas Easy JPM ESG EMBI Global Diversified Composite UCITS ETF GBP Hedged,"0,26%",Capitalisation,Réplication complète,LU2868144093,ERROR_DATA
-EDEC.DE,BNP Paribas Easy S&P 500 II UCITS ETF USD (Dist),"0,08%",Distribution,Basée sur swap,LU2993390686,ERROR_DATA
 CSSPX.MI,iShares Core S&P 500 UCITS ETF USD (Acc),"0,07%",Capitalisation,Réplication complète,IE00B5BMR087,0.3519999999999982
 IWDA.L,iShares Core MSCI World UCITS ETF USD (Acc),"0,20%",Capitalisation,Échantillonnage optimisé,IE00B4L5Y983,0.13000000000000114
 EMIM.L,iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc),"0,18%",Capitalisation,Réplication complète,IE00BKM4GZ66,0.06200000000000046
@@ -1165,11 +1143,9 @@ VJPA.DE,Vanguard FTSE Japan UCITS ETF Accumulating,"0,15%",Capitalisation,Répli
 VFEA.DE,Vanguard FTSE Emerging Markets UCITS ETF Acc,"0,22%",Capitalisation,Réplication complète,IE00BK5BR733,-0.5565
 VERE.DE,Vanguard FTSE Developed Europe ex UK UCITS ETF (EUR) Accumulating,"0,10%",Capitalisation,Réplication complète,IE00BK5BQY34,0.598
 IE00BFMXVQ44.SG,Vanguard FTSE 250 UCITS ETF (GBP) Accumulating,"0,10%",Capitalisation,Réplication complète,IE00BFMXVQ44,-0.1222
-IE00BMVB5R75.SG,Vanguard LifeStrategy 80% Equity UCITS ETF (EUR) Accumulating,"0,25%",Capitalisation,Réplication complète,IE00BMVB5R75,ERROR_DATA
 VDEA.L,Vanguard USD Emerging Markets Government Bond UCITS ETF Accumulating,"0,23%",Capitalisation,Échantillonnage,IE00BGYWCB81,-0.1774
 IE00BGYWFL94.SG,Vanguard USD Corporate Bond UCITS ETF EUR Hedged Accumulating,"0,12%",Capitalisation,Échantillonnage,IE00BGYWFL94,-0.024
 IE00BNG8L278.SG,Vanguard ESG Global All Cap UCITS ETF (USD) Accumulating,"0,24%",Capitalisation,Échantillonnage optimisé,IE00BNG8L278,-0.0873
-IE00BMVB5P51.SG,Vanguard LifeStrategy 60% Equity UCITS ETF Accumulating,"0,25%",Capitalisation,Réplication complète,IE00BMVB5P51,ERROR_DATA
 VUTY.MI,Vanguard USD Treasury Bond UCITS ETF Distributing,"0,05%",Distribution,Échantillonnage,IE00BZ163M45,-0.0733
 VEMT.L,Vanguard USD Emerging Markets Government Bond UCITS ETF Distributing,"0,23%",Distribution,Échantillonnage,IE00BZ163L38,-0.1801
 VUCP.DE,Vanguard USD Corporate Bond UCITS ETF Distributing,"0,07%",Distribution,Échantillonnage,IE00BZ163K21,-0.0093
@@ -1184,7 +1160,6 @@ IE000O58J820.SG,Vanguard ESG North America All Cap UCITS ETF (USD) Accumulating,
 V3GE.DE,Vanguard ESG Global Corporate Bond UCITS ETF EUR Hedged Distributing,"0,15%",Distribution,Réplication complète,IE00BNDS1Q47,-0.1289
 IE00BG143G97.SG,Vanguard Germany All Cap UCITS ETF Distributing,"0,10%",Distribution,Réplication complète,IE00BG143G97,0.4334
 V3GS.L,Vanguard ESG Global Corporate Bond UCITS ETF GBP Hedged Accumulating,"0,15%",Capitalisation,Échantillonnage,IE00BNDS1T77,-0.1715
-IE00BMVB5M21.SG,Vanguard LifeStrategy 40% Equity UCITS ETF Accumulating,"0,25%",Capitalisation,Réplication complète,IE00BMVB5M21,ERROR_DATA
 VGVA.L,Vanguard UK Gilt UCITS ETF Accumulating,"0,05%",Capitalisation,Échantillonnage,IE00BH04GW44,-0.0407
 IE000QUOSE01.SG,Vanguard ESG Developed Europe All Cap UCITS ETF (EUR) Accumulating,"0,12%",Capitalisation,Réplication complète,IE000QUOSE01,0.3558
 VAGP.L,Vanguard Global Aggregate Bond UCITS ETF GBP Hedged Distributing,"0,08%",Distribution,Échantillonnage,IE00BG47KG48,-0.0825
@@ -1193,17 +1168,13 @@ VAGE.DE,Vanguard Global Aggregate Bond UCITS ETF EUR Hedged Distributing,"0,08%"
 VGUE.DE,Vanguard U.K. Gilt UCITS ETF EUR Hedged Accumulating,"0,10%",Capitalisation,Échantillonnage,IE00BMX0B524,-0.0203
 VCDE.DE,Vanguard USD Corporate 1-3 Year Bond UCITS ETF (EUR) Hedged Accumulating,"0,14%",Capitalisation,Échantillonnage,IE00BGYWSW13,-0.1454
 V3PA.SW,Vanguard ESG Developed Asia Pacific All Cap UCITS ETF (USD) Accumulating,"0,17%",Capitalisation,Réplication complète,IE000GOJO2A3,-0.1789
-IE00BMVB5K07.SG,Vanguard LifeStrategy 20% Equity UCITS ETF Accumulating,"0,25%",Capitalisation,Réplication complète,IE00BMVB5K07,ERROR_DATA
-IE00BMVB5Q68.SG,Vanguard LifeStrategy 60% Equity UCITS ETF Distributing,"0,25%",Distribution,Réplication complète,IE00BMVB5Q68,ERROR_DATA
 VJPE.MI,Vanguard FTSE Japan UCITS ETF EUR Hedged Accumulating,"0,20%",Capitalisation,Réplication complète,IE00BFMXYY33,-0.9077
 V3GP.L,Vanguard ESG Global Corporate Bond UCITS ETF GBP Hedged Distributing,"0,15%",Distribution,Échantillonnage,IE00BNDS1V99,-0.1515
-IE00BMVB5S82.SG,Vanguard LifeStrategy 80% Equity UCITS ETF Distributing,"0,25%",Distribution,Réplication complète,IE00BMVB5S82,ERROR_DATA
 VSCF.MI,Vanguard EUR Corporate 1-3 Years Bond UCITS ETF EUR Accumulating,"0,09%",Capitalisation,Échantillonnage,IE00BH04FZ00,-0.2953
 VGGF.MI,Vanguard Global Government Bond UCITS ETF EUR Hedged Accumulating,"0,10%",Capitalisation,Échantillonnage,IE000B1A2798,-0.1265
 V3MA.SW,Vanguard ESG Emerging Markets All Cap UCITS ETF (USD) Accumulating,"0,24%",Capitalisation,Réplication complète,IE000KPJJWM6,-0.706
 V3GU.L,Vanguard ESG Global Corporate Bond UCITS ETF USD Hedged Accumulating,"0,15%",Capitalisation,Échantillonnage,IE00BNDS1W07,-0.1402
 VGGS.L,Vanguard Global Government Bond UCITS ETF GBP Hedged Accumulating,"0,10%",Capitalisation,Échantillonnage,IE000AI6QNJ5,-0.1301
-IE00BMVB5N38.SG,Vanguard LifeStrategy 40% Equity UCITS ETF Distributing,"0,25%",Distribution,Réplication complète,IE00BMVB5N38,ERROR_DATA
 IE000NRGX9M3.SG,Vanguard ESG Developed Europe All Cap UCITS ETF (EUR) Distributing,"0,12%",Distribution,Réplication complète,IE000NRGX9M3,0.3557
 V3SD.MI,Vanguard ESG USD Corporate Bond UCITS ETF (USD) Accumulating,"0,11%",Capitalisation,Échantillonnage,IE000JQV8511,-0.0345
 IE00BDD48S37.SG,Vanguard EUR Corporate 1-3 Years Bond UCITS ETF EUR Distributing,"0,09%",Distribution,Échantillonnage,IE00BDD48S37,-0.2929
@@ -1213,7 +1184,6 @@ V3PL.MI,Vanguard ESG Developed Asia Pacific All Cap UCITS ETF (USD) Distributing
 VGCA.L,Vanguard USD Corporate 1-3 Year Bond UCITS ETF (GBP) Hedged Distributing,"0,14%",Distribution,Échantillonnage,IE00BGYWSZ44,-0.0987
 VSGE.MI,Vanguard EUR Eurozone Government 1-3 Year Bond UCITS ETF (EUR) Distributing,"0,07%",Distribution,Échantillonnage,IE000HARFTG3,-0.0218
 VJPU.L,Vanguard FTSE Japan UCITS ETF USD Hedged Acc,"0,20%",Capitalisation,Réplication complète,IE00BFMXZJ56,-0.4403
-IE00BMVB5L14.SG,Vanguard LifeStrategy 20% Equity UCITS ETF Distributing,"0,25%",Distribution,Réplication complète,IE00BMVB5L14,ERROR_DATA
 IE0001VXZTV7.SG,Vanguard ESG Emerging Markets All Cap UCITS ETF (USD) Distributing,"0,24%",Distribution,Réplication complète,IE0001VXZTV7,-0.7056
 IE000F37PGZ3.SG,Vanguard ESG EUR Corporate Bond UCITS ETF (EUR) Distributing,"0,09%",Distribution,Échantillonnage,IE000F37PGZ3,-0.1306
 V3SU.AS,Vanguard ESG USD Corporate Bond UCITS ETF (USD) Distributing,"0,11%",Distribution,Échantillonnage,IE000RO1O3N4,-0.0337
@@ -1324,14 +1294,12 @@ XDGE.DE,Xtrackers USD Corporate Bond UCITS ETF 2D EUR hedged,"0,21%",Distributio
 XAXJ.L,Xtrackers MSCI AC Asia ex Japan ESG Swap UCITS ETF 1C,"0,65%",Capitalisation,Basée sur swap non financé,LU0322252171,-0.7
 XGSI.L,Xtrackers II Global Government Bond UCITS ETF 3C - USD Hedged,"0,15%",Capitalisation,Échantillonnage,LU0641006456,2.21
 XT01.L,Xtrackers US Treasuries Ultrashort Bond UCITS ETF 1C,"0,06%",Capitalisation,Échantillonnage,IE00BM97MR69,-0.06
-XZWD.DE,Xtrackers MSCI World ESG UCITS ETF 1D,"0,20%",Distribution,Réplication complète,IE000E4BATC9,ERROR_DATA
 DX2E.DE,Xtrackers S&P Global Infrastructure Swap UCITS ETF 1C,"0,60%",Capitalisation,Basée sur swap non financé,LU0322253229,-0.36
 XFVT.L,Xtrackers FTSE Vietnam Swap UCITS ETF 1C,"0,85%",Capitalisation,Basée sur swap non financé,LU0322252924,-1.25
 IE000ONQ3X90.SG,Xtrackers MSCI World UCITS ETF 2C - EUR Hedged,"0,17%",Capitalisation,Échantillonnage optimisé,IE000ONQ3X90,-2.61
 XD5D.L,Xtrackers MSCI EMU UCITS ETF 1C - USD Hedged,"0,17%",Capitalisation,Réplication complète,LU1127514245,2.38
 DBXF.DE,Xtrackers Eurozone Government Bond 15-30 UCITS ETF 1C,"0,15%",Capitalisation,Échantillonnage,LU0290357507,-0.12
 XDWM.DE,Xtrackers MSCI World Materials UCITS ETF 1C,"0,25%",Capitalisation,Réplication complète,IE00BM67HS53,-0.22
-SCWX.DE,Scalable MSCI AC World Xtrackers UCITS ETF 1C,"0,00%",Capitalisation,Physique & Synthétique,LU2903252349,ERROR_DATA
 XESD.DE,Xtrackers Spanish Equity UCITS ETF 1D,"0,30%",Distribution,Réplication complète,LU0994505336,0.34
 ASHR.L,Xtrackers Harvest CSI 300 UCITS ETF 1D,"0,65%",Distribution,Réplication complète,LU0875160326,-0.85
 XD9C.SW,Xtrackers MSCI USA UCITS ETF 3C CHF Hedged,"0,12%",Capitalisation,Réplication complète,IE00BG04LZ52,-3.53
@@ -1355,7 +1323,6 @@ IE000UX5WPU4.SG,Xtrackers iBoxx EUR Corporate Bond Yield Plus UCITS ETF 1C,"0,25
 IE00BL58LJ19.SG,Xtrackers USD Corporate Bond SRI PAB UCITS ETF 1C,"0,16%",Capitalisation,Échantillonnage,IE00BL58LJ19,-0.1
 LU1349386927.SG,Xtrackers DAX UCITS ETF 1D,"0,09%",Distribution,Réplication complète,LU1349386927,-0.68
 XSTR.L,Xtrackers II GBP Overnight Rate Swap UCITS ETF 1D 1D,"0,10%",Distribution,Basée sur swap non financé,LU0321464652,-0.08
-XRSM.DE,Xtrackers MSCI USA Screened UCITS ETF 1C,"0,07%",Capitalisation,Réplication complète,IE00BJZ2DC62,ERROR_DATA
 LU2673523481.SG,Xtrackers II Target Maturity Sept 2031 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage optimisé,LU2673523481,-0.12
 XGBE.SW,Xtrackers EUR Corporate Green Bond UCITS ETF 1C,"0,25%",Capitalisation,Échantillonnage optimisé,IE000MCVFK47,-0.26
 IE000UMV0L21.SG,Xtrackers MSCI USA ESG UCITS ETF 1D,"0,15%",Distribution,Réplication complète,IE000UMV0L21,0.08
@@ -1371,7 +1338,6 @@ XDJE.DE,Xtrackers Nikkei 225 UCITS ETF 2D EUR Hedged,"0,19%",Distribution,Répli
 DBXG.DE,Xtrackers Eurozone Government Bond 25+ UCITS ETF 1C,"0,15%",Capitalisation,Échantillonnage,LU0290357846,-0.12
 LU2673523564.SG,Xtrackers II Target Maturity Sept 2033 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage optimisé,LU2673523564,-0.09
 XUT3.L,Xtrackers II US Treasuries 1-3 UCITS ETF 1D,"0,06%",Distribution,Échantillonnage,LU0429458895,-0.12
-IE000Z0FC0G5.SG,Xtrackers MSCI World ex USA UCITS ETF 1D,"0,15%",Distribution,Réplication complète,IE000Z0FC0G5,ERROR_DATA
 XMUJ.L,Xtrackers MSCI Japan UCITS ETF 2D USD hedged,"0,40%",Distribution,Réplication complète,LU0927735406,3.53
 XYPD.DE,Xtrackers iBoxx Sovereigns Eurozone Yield Plus UCITS ETF 1D,"0,15%",Distribution,Échantillonnage,LU0962071741,-0.15
 XSFR.L,Xtrackers S&P Select Frontier Swap UCITS ETF 1C,"0,95%",Capitalisation,Basée sur swap non financé,LU0328476410,-2.01
@@ -1383,14 +1349,12 @@ XCS4.L,Xtrackers MSCI Thailand UCITS ETF 1C,"0,50%",Capitalisation,Réplication 
 XMTD.L,Xtrackers MSCI Taiwan UCITS ETF 1C,"0,65%",Capitalisation,Réplication complète,LU0292109187,-0.55
 DX2G.DE,Xtrackers CAC 40 UCITS ETF 1D,"0,20%",Distribution,Réplication complète,LU0322250985,0.37
 IE000TL3PL69.SG,Xtrackers MSCI World Momentum ESG UCITS ETF,"0,25%",Capitalisation,Réplication complète,IE000TL3PL69,-0.18
-XEEW.DE,Xtrackers World Equity Enhanced Active UCITS ETF 1C,"0,25%",Capitalisation,Réplication complète,IE00094GSCQ4,ERROR_DATA
 XDND.DE,Xtrackers MSCI North America High Dividend Yield UCITS ETF 1C,"0,39%",Capitalisation,Réplication complète,IE00BH361H73,0.09
 XDCC.DE,Xtrackers USD Corporate Bond UCITS ETF 1C,"0,12%",Capitalisation,Échantillonnage,IE00BFMKQC67,-0.07
 LU2673523218.SG,Xtrackers II Target Maturity Sept 2027 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage optimisé,LU2673523218,-0.11
 D5BL.DE,Xtrackers MSCI Europe Value UCITS ETF 1C,"0,15%",Capitalisation,Réplication complète,LU0486851024,0.32
 XS7R.L,Xtrackers MSCI Europe Financials Screened UCITS ETF 1C 1C,"0,17%",Capitalisation,Réplication complète,LU0292103651,0.35
 IE000DNSAS54.SG,Xtrackers MSCI Emerging Markets Climate Transition UCITS ETF 1C 1C,"0,16%",Capitalisation,Réplication complète,IE000DNSAS54,-0.19
-XEEU.DE,Xtrackers US Equity Enhanced Active UCITS ETF 1C,"0,20%",Capitalisation,Réplication complète,IE0002PGSLZ5,ERROR_DATA
 0DWR.L,Xtrackers Spanish Equity UCITS ETF 1C,"0,30%",Capitalisation,Réplication complète,LU0592216393,0.35
 LU2468423459.SG,Xtrackers II ESG Eurozone Government Bond UCITS ETF 1C,"0,15%",Capitalisation,Échantillonnage optimisé,LU2468423459,-0.15
 XCSI.DE,Xtrackers CSI500 Swap UCITS ETF 1C 1C,"0,35%",Capitalisation,Basée sur swap,LU2788421340,10.04
@@ -1401,7 +1365,6 @@ XDUK.L,Xtrackers FTSE 100 UCITS ETF 1C,"0,09%",Capitalisation,Réplication compl
 XGVD.MI,Xtrackers Global Government Bond UCITS ETF 1D EUR hedged,"0,25%",Distribution,Échantillonnage,LU0690964092,0.04
 XUKX.L,Xtrackers FTSE 100 UCITS ETF Income 1D,"0,09%",Distribution,Réplication complète,LU0292097234,-0.21
 XMBR.L,Xtrackers MSCI Brazil UCITS ETF 1C 1C,"0,25%",Capitalisation,Réplication complète,LU0292109344,-0.72
-IE000TSML5I8.SG,Xtrackers MSCI USA Screened UCITS ETF 2C - EUR Hedged,"0,12%",Capitalisation,Réplication complète,IE000TSML5I8,ERROR_DATA
 XBAG.DE,Xtrackers II ESG Global Aggregate Bond UCITS ETF 1D,"0,10%",Distribution,Échantillonnage,LU0942970103,-0.15
 IE00BNC1G699.SG,Xtrackers MSCI EMU ESG UCITS ETF 1C,"0,20%",Capitalisation,Réplication complète,IE00BNC1G699,0.36
 IE000LAUZQT6.SG,Xtrackers MSCI World Value ESG UCITS ETF 1C 1C,"0,25%",Capitalisation,Réplication complète,IE000LAUZQT6,0.03
@@ -1411,13 +1374,11 @@ DX2I.DE,Xtrackers MSCI Europe Screened UCITS ETF 1C 1C,"0,12%",Capitalisation,R�
 LU2675291913.SG,Xtrackers MSCI Emerging Markets Swap UCITS ETF 1D,"0,18%",Distribution,Basée sur swap non financé,LU2675291913,0.1
 DBXI.DE,Xtrackers FTSE MIB UCITS ETF 1D,"0,30%",Distribution,Réplication complète,LU0274212538,0.33
 XM1D.DE,Xtrackers MSCI Japan UCITS ETF 1D,"0,12%",Distribution,Réplication complète,LU2581375230,-0.06
-XWSC.DE,Xtrackers MSCI World Screened UCITS ETF 1C,"0,19%",Capitalisation,Échantillonnage optimisé,IE000I9HGDZ3,ERROR_DATA
 IE00BL58LL31.SG,Xtrackers USD Corporate Bond SRI PAB UCITS ETF 2C - EUR Hedged,"0,21%",Capitalisation,Échantillonnage,IE00BL58LL31,-2.1
 XDUE.SW,Xtrackers MSCI EMU UCITS ETF 3C CHF hedged,"0,17%",Capitalisation,Réplication complète,LU1215828218,-0.54
 XUEN.L,Xtrackers MSCI USA Energy UCITS ETF 1D,"0,12%",Distribution,Réplication complète,IE00BCHWNS19,0.52
 XAUS.L,Xtrackers S&P/ASX 200 UCITS ETF 1D,"0,50%",Distribution,Réplication complète,LU0328474803,-0.59
 IE000XOQ9TK4.SG,Xtrackers MSCI Next Generation Internet Innovation UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE000XOQ9TK4,-0.23
-XDJU.DE,Xtrackers DJE US Equity Research UCITS ETF 1C,"0,50%",Capitalisation,Réplication complète,IE00050EGWG5,ERROR_DATA
 IE00028H9QJ8.SG,Xtrackers USD Corporate Green Bond UCITS ETF 1C EUR Hedged,"0,25%",Capitalisation,Échantillonnage optimisé,IE00028H9QJ8,-2.24
 XZEP.DE,Xtrackers MSCI Europe ESG UCITS ETF 1D,"0,18%",Distribution,Réplication complète,IE0004ZJGWT9,0.06
 XDNE.DE,Xtrackers MSCI Japan Screened UCITS ETF 3C - EUR Hedged,"0,25%",Capitalisation,Réplication complète,IE00BRB36B93,2.46
@@ -1438,12 +1399,10 @@ LU0478205965.SG,Xtrackers II EUR Corporate Bond UCITS ETF 1D,"0,09%",Distributio
 LU2552296563.SG,Xtrackers II iBoxx Eurozone Government Bond Yield Plus 1-3 UCITS ETF 2D,"0,15%",Distribution,Échantillonnage,LU2552296563,-0.15
 XSPR.L,Xtrackers MSCI Europe Materials Screened UCITS ETF 1C 1C,"0,17%",Capitalisation,Réplication complète,LU0292100806,0.05
 XMLA.L,Xtrackers MSCI EM Latin America ESG Swap UCITS ETF 1C,"0,40%",Capitalisation,Basée sur swap non financé,LU0292108619,-0.63
-XMN1.DE,Xtrackers MSCI Nordic UCITS ETF 1C,"0,30%",Capitalisation,Réplication complète,IE000BO2Y0T8,ERROR_DATA
 IE0006GNB732.SG,Xtrackers EUR High Yield Corporate Bond SRI PAB UCITS ETF 1C 1C,"0,25%",Capitalisation,Échantillonnage optimisé,IE0006GNB732,-0.52
 IE000TZT8TI0.SG,Xtrackers Emerging Markets Net Zero Pathway Paris Aligned UCITS ETF,"0,20%",Capitalisation,Réplication complète,IE000TZT8TI0,-0.3
 XSNR.L,Xtrackers MSCI Europe Industrials Screened UCITS ETF 1C 1C,"0,17%",Capitalisation,Réplication complète,LU0292106084,0.22
 XMCX.L,Xtrackers FTSE 250 UCITS ETF 1D,"0,15%",Distribution,Réplication complète,LU0292097317,-0.31
-XEEE.DE,Xtrackers Europe Equity Enhanced Active UCITS ETF 1C,"0,25%",Capitalisation,Réplication complète,IE00002ZKAP0,ERROR_DATA
 XBGB.L,Xtrackers II Germany Government Bond UCITS ETF 2D - GBP Hedged,"0,20%",Distribution,Échantillonnage,LU2523866296,1.5
 X7GB.L,Xtrackers II Eurozone Government Bond 7-10 UCITS ETF 1D - GBP Hedged,"0,20%",Distribution,Échantillonnage,LU2523865728,1.47
 XCS2M.XC,Xtrackers II Australia Government Bond UCITS ETF 1C,"0,25%",Capitalisation,Échantillonnage,LU0494592974,-0.25
@@ -1470,11 +1429,8 @@ LU2376679564.SG,Xtrackers Harvest MSCI China Tech 100 UCITS ETF 1C 1C,"0,44%",Ca
 IE00BG04LT92.SG,Xtrackers USD High Yield Corporate Bond UCITS ETF 2C EUR Hedged,"0,25%",Capitalisation,Échantillonnage optimisé,IE00BG04LT92,-2.43
 IE0002ZM3JI1.SG,Xtrackers USA Net Zero Pathway Paris Aligned UCITS ETF 1C,"0,10%",Capitalisation,Réplication complète,IE0002ZM3JI1,0.08
 IE0003W9O921.SG,Xtrackers USD Corporate Green Bond UCITS ETF 2C Acc USD,"0,25%",Capitalisation,Échantillonnage optimisé,IE0003W9O921,-0.3
-XB28.DE,Xtrackers II Target Maturity Sept 2028 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage,LU2810185665,ERROR_DATA
 LU2504532487.SG,Xtrackers II Eurozone Government Green Bond UCITS ETF 1D 1D,"0,18%",Distribution,Échantillonnage optimisé,LU2504532487,-0.14
-XB30.DE,Xtrackers II Target Maturity Sept 2030 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage,LU2809864296,ERROR_DATA
 XBI0.DE,Xtrackers World Biodiversity Focus SRI UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE000E0V65D8,-0.1
-LU1920015366.SG,Xtrackers MSCI EMU UCITS ETF 4C,"0,12%",Capitalisation,Réplication complète,LU1920015366,ERROR_DATA
 XZDZ.DE,Xtrackers MSCI EMU High Dividend Yield ESG UCITS ETF 1D 1D,"0,25%",Distribution,Réplication complète,IE000VCBWFL8,0.4
 IE000YDOORK7.SG,Xtrackers MSCI Fintech Innovation UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE000YDOORK7,-0.24
 XDCH.SW,Xtrackers DAX ESG Screened UCITS ETF 4C CHF Hedged,"0,19%",Capitalisation,Réplication complète,LU1221102491,-2.1
@@ -1485,29 +1441,21 @@ XCEU.DE,Xtrackers MSCI EMU Climate Transition UCITS ETF 1C 1C,"0,12%",Capitalisa
 IE000V0GDVU7.SG,Xtrackers MSCI Global SDG 11 Sustainable Cities UCITS ETF 1C 1C,"0,35%",Capitalisation,Réplication complète,IE000V0GDVU7,-0.24
 XECT.DE,Xtrackers MSCI Europe Climate Transition UCITS ETF 1C 1C,"0,04%",Capitalisation,Réplication complète,IE000N9MLVT1,0.26
 AH50.DE,Xtrackers Harvest FTSE China A-H 50 UCITS ETF 1D,"0,65%",Distribution,Réplication complète,LU1310477036,-1.26
-GTIL.DE,Xtrackers World Green Tech Innovators UCITS ETF 1C,"0,35%",Capitalisation,Réplication complète,LU2859392081,ERROR_DATA
 IE0004KLW911.SG,Xtrackers ESG USD Emerging Markets Bond Quality Weighted UCITS ETF 1C,"0,45%",Capitalisation,Échantillonnage optimisé,IE0004KLW911,-0.49
 XMVE.DE,Xtrackers MSCI EMU Screened UCITS ETF 1D 1D,"0,12%",Distribution,Réplication complète,IE00BDGN9Z19,0.42
 XDUD.SW,Xtrackers DAX ESG Screened UCITS ETF 2C USD Hedged,"0,19%",Capitalisation,Réplication complète,LU1221100792,3.2
 IE000PSF3A70.SG,Xtrackers MSCI Global SDGs UCITS ETF 1C 1C,"0,35%",Capitalisation,Réplication complète,IE000PSF3A70,-0.23
-XB34.DE,Xtrackers II Target Maturity Sept 2034 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage,LU2809864619,ERROR_DATA
 XBAT.DE,Xtrackers II Target Maturity Sept 2029 Italy and Spain Government Bond UCITS ETF 1C 1C,"0,12%",Capitalisation,Échantillonnage,LU0484969463,0.06
 XSXE.DE,Xtrackers Stoxx Europe 600 UCITS ETF 2C - EUR Hedged,"0,25%",Capitalisation,Réplication complète,LU1772333404,-0.39
 XBUZ.DE,Xtrackers USA Biodiversity Focus SRI UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE000LOSV2D0,-0.11
-XM31.DE,Xtrackers II Target Maturity Sept 2031 EUR Corporate Bond UCITS ETF 1C,"0,12%",Capitalisation,Échantillonnage,LU2673523135,ERROR_DATA
 XUTG.L,Xtrackers II US Treasuries UCITS ETF 2C - GBP Hedged,"0,10%",Capitalisation,Échantillonnage,LU2610432036,-0.35
-LU2673523051.SG,Xtrackers II Target Maturity Sept 2033 EUR Corporate Bond UCITS ETF 1C,"0,12%",Capitalisation,Échantillonnage,LU2673523051,ERROR_DATA
 XBEE.DE,Xtrackers Europe Biodiversity Focus SRI UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE000VMAR5O6,-0.07
-XDRE.DE,Xtrackers Developed Green Real Estate ESG UCITS ETF 1C 1C,"0,18%",Capitalisation,Réplication complète,IE00BN2BCY94,ERROR_DATA
-XB32.DE,Xtrackers II Target Maturity Sept 2032 EUR Corporate Bond UCITS ETF 1D,"0,12%",Distribution,Échantillonnage,LU2809864452,ERROR_DATA
 IE000Y6L6LE6.SG,Xtrackers EMU Net Zero Pathway Paris Aligned UCITS ETF 1C 1C,"0,15%",Capitalisation,Réplication complète,IE000Y6L6LE6,0.37
 IE000GYDNJS5.SG,Xtrackers MSCI USA Climate Transition UCITS ETF 1D 1D,"0,04%",Distribution,Réplication complète,IE000GYDNJS5,0.14
 DXSG.DE,Xtrackers MSCI Europe Communication Services Screened UCITS ETF 1C 1C,"0,17%",Capitalisation,Réplication complète,LU0292104030,0.04
 IE0007WJ6B10.SG,Xtrackers MSCI Global Clean Water & Sanitation UCITS ETF 1C 1C,"0,35%",Capitalisation,Réplication complète,IE0007WJ6B10,-0.12
-XM29.DE,Xtrackers II Target Maturity Sept 2029 EUR Corporate Bond UCITS ETF 1C,"0,12%",Capitalisation,Échantillonnage,LU2673522913,ERROR_DATA
 IE0006FFX5U1.SG,Xtrackers MSCI Innovation UCITS ETF 1C 1C,"0,30%",Capitalisation,Réplication complète,IE0006FFX5U1,-0.3
 IE00BNKF6C99.SG,Xtrackers MSCI Europe Consumer Discretionary Screened UCITS ETF 1C,"0,17%",Capitalisation,Réplication complète,IE00BNKF6C99,0.15
-XIFE.DE,Xtrackers Global Infrastructure ESG UCITS ETF 1C 1C,"0,35%",Capitalisation,Réplication complète,IE00BYZNF849,ERROR_DATA
 LU2278080713.SG,Xtrackers Bloomberg Commodity Swap UCITS ETF 1C,"0,19%",Capitalisation,Basée sur swap non financé,LU2278080713,-0.07
 IE0001JH5CB4.SG,Xtrackers Europe Net Zero Pathway Paris Aligned UCITS ETF 1C,"0,15%",Capitalisation,Réplication complète,IE0001JH5CB4,0.15
 XBGG.L,Xtrackers II ESG Global Aggregate Bond UCITS ETF 3D - GBP Hedged,"0,10%",Distribution,Échantillonnage,LU0942970368,-0.68
@@ -1515,10 +1463,8 @@ IE000KD0BZ68.SG,Xtrackers MSCI Genomic Healthcare Innovation UCITS ETF 1C 1C,"0,
 XDNU.L,Xtrackers MSCI Japan Screened UCITS ETF 4C - USD Hedged,"0,25%",Capitalisation,Réplication complète,IE00BTGD1B38,5.21
 LU2662649412.SG,Xtrackers II US Treasuries 10+ UCITS ETF 1D,"0,06%",Distribution,Échantillonnage,LU2662649412,-0.04
 XZDU.DE,Xtrackers MSCI USA High Dividend Yield ESG UCITS ETF 1D 1D,"0,25%",Distribution,Réplication complète,IE000V04SL39,0.09
-GTIS.DE,Xtrackers World Small Cap Green Tech Innovators UCITS ETF 1C,"0,45%",Capitalisation,Réplication complète,LU2859297330,ERROR_DATA
 XG12.L,Xtrackers MSCI Global Circular Economy UCITS ETF 1C 1C,"0,35%",Capitalisation,Réplication complète,IE000Y6ZXZ48,-0.26
 LU2641053827.SG,Xtrackers II iBoxx Eurozone Government Bond Yield Plus 0-1 UCITS ETF 1C,"0,07%",Capitalisation,Échantillonnage optimisé,LU2641053827,0.09
-XM27.DE,Xtrackers II Target Maturity Sept 2027 EUR Corporate Bond UCITS ETF 1C,"0,12%",Capitalisation,Échantillonnage,LU2673522830,ERROR_DATA
 IE0006FDYJF8.SG,Xtrackers MSCI Japan Climate Transition UCITS ETF 1D 1D,"0,04%",Distribution,Réplication complète,IE0006FDYJF8,-0.15
 XZWG.DE,Xtrackers II ESG Global Government Bond UCITS ETF 1D,"0,20%",Distribution,Échantillonnage optimisé,LU2385068163,-0.18
 IE00BDB7J586.SG,Xtrackers MSCI USA Minimum Volatility UCITS ETF 1D,"0,20%",Distribution,Réplication complète,IE00BDB7J586,0.18
@@ -1539,5 +1485,4 @@ XGBB.L,Xtrackers USD Corporate Green Bond UCITS ETF 1D GBP Hedged,"0,25%",Distri
 XZUD.L,Xtrackers II ESG Global Government Bond UCITS ETF 3D - USD Hedged,"0,25%",Distribution,Échantillonnage,LU2385068320,2.6
 XGEP.L,Xtrackers II Eurozone Government Bond 3-5 UCITS ETF 2D - GBP Hedged,"0,20%",Distribution,Échantillonnage optimisé,LU2606231418,1.47
 XDGB.L,Xtrackers USD Corporate Bond UCITS ETF 5D - GBP Hedged,"0,21%",Distribution,Échantillonnage optimisé,IE00BG04LY46,-0.7
-XJ2C.DE,Xtrackers II Japan Government Bond UCITS ETF 2C - EUR Hedged,"0,20%",Capitalisation,Échantillonnage,LU3003218446,ERROR_DATA
 XGLU.L,Xtrackers II Eurozone Government Bond UCITS ETF 2C - USD Hedged,"0,20%",Capitalisation,Échantillonnage,LU2009147591,1.43
