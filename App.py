@@ -289,8 +289,17 @@ def format_td_display(td_value):
     else:
         return f'<span class="td-neutral">{td_value:.2f}%</span>'
 
-def calculate_fees(amount, broker_name, grille_name, broker_structures):
-    """Calcule les frais selon la structure tarifaire"""
+def calculate_fees(amount, broker_name, grille_name, broker_structures, custom_fee=None, custom_fee_type=None):
+    """Calcule les frais selon la structure tarifaire ou les frais personnalisés"""
+    
+    # Si frais personnalisés
+    if broker_name == "Personnalisé" and custom_fee is not None and custom_fee_type is not None:
+        if custom_fee_type == "fixed":
+            return custom_fee
+        elif custom_fee_type == "percentage":
+            return amount * custom_fee / 100
+    
+    # Sinon, utiliser la structure tarifaire classique
     if broker_name not in broker_structures or grille_name not in broker_structures[broker_name]["grilles"]:
         return 0
     
@@ -319,7 +328,7 @@ def calculate_fees(amount, broker_name, grille_name, broker_structures):
     
     return 0
 
-def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures):
+def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures, custom_buy_fee=None, custom_buy_fee_type=None):
     """
     Détermine le nombre optimal de parts ETF2 à acheter
     en s'assurant que les liquidités restantes couvrent les frais d'achat
@@ -346,7 +355,7 @@ def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_na
         purchase_amount = etf2_shares * etf2_price
         
         # Frais d'achat pour ce montant
-        buy_fees = calculate_fees(purchase_amount, broker_name, grille_name, broker_structures)
+        buy_fees = calculate_fees(purchase_amount, broker_name, grille_name, broker_structures, custom_buy_fee, custom_buy_fee_type)
         
         # Liquidités restantes après achat + frais
         remaining_cash = net_amount_after_sell - purchase_amount - buy_fees
@@ -373,7 +382,9 @@ def calculate_optimal_etf2_purchase(net_amount_after_sell, etf2_price, broker_na
     }
 
 def calculate_replacement_profitability_td(etf1_shares, etf1_price, etf1_td, 
-                                         etf2_price, etf2_td, broker_name, grille_name, broker_structures):
+                                         etf2_price, etf2_td, broker_name, grille_name, broker_structures,
+                                         custom_sell_fee=None, custom_sell_fee_type=None,
+                                         custom_buy_fee=None, custom_buy_fee_type=None):
     """
     Calcule la rentabilité du remplacement basée sur la Tracking Difference
     """
@@ -382,14 +393,15 @@ def calculate_replacement_profitability_td(etf1_shares, etf1_price, etf1_td,
     sell_amount = etf1_shares * etf1_price
     
     # 2. Frais de vente
-    sell_fees = calculate_fees(sell_amount, broker_name, grille_name, broker_structures)
+    sell_fees = calculate_fees(sell_amount, broker_name, grille_name, broker_structures, custom_sell_fee, custom_sell_fee_type)
     
     # 3. Montant net après vente
     net_amount_after_sell = sell_amount - sell_fees
     
     # 4. Calcul optimal du nombre d'ETF2 à acheter
     purchase_result = calculate_optimal_etf2_purchase(
-        net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures
+        net_amount_after_sell, etf2_price, broker_name, grille_name, broker_structures,
+        custom_buy_fee, custom_buy_fee_type
     )
     
     # 5. Gestion du cas où aucun achat n'est possible
@@ -617,19 +629,26 @@ def main():
     col1, col2 = st.columns([3, 3])
     
     with col1:
-        broker_names = list(broker_structures.keys())
-        if broker_names:
-            selected_broker = st.selectbox(
-                "Courtier",
-                options=broker_names,
-                key="broker_select"
-            )
-        else:
-            st.warning("Aucun courtier configuré")
-            selected_broker = None
+        # Ajouter "Personnalisé" à la fin de la liste des courtiers
+        broker_names = list(broker_structures.keys()) + ["Personnalisé"]
+        
+        # Définir l'index par défaut pour Boursorama
+        default_index = 0
+        if "Boursorama" in broker_names:
+            default_index = broker_names.index("Boursorama")
+        
+        selected_broker = st.selectbox(
+            "Courtier",
+            options=broker_names,
+            index=default_index,
+            key="broker_select"
+        )
     
     with col2:
-        if selected_broker and selected_broker in broker_structures:
+        if selected_broker == "Personnalisé":
+            st.selectbox("Grille tarifaire", options=["Frais personnalisés"], key="grille_select_custom", disabled=True)
+            selected_grille = "custom"
+        elif selected_broker and selected_broker in broker_structures:
             grille_options = list(broker_structures[selected_broker]["grilles"].keys())
             if grille_options:
                 selected_grille = st.selectbox(
@@ -644,8 +663,92 @@ def main():
             st.selectbox("Grille tarifaire", options=[], key="grille_select_empty")
             selected_grille = None
     
-    # Affichage de la grille sélectionnée
-    if selected_broker and selected_grille:
+    # Section frais personnalisés
+    if selected_broker == "Personnalisé":
+        st.markdown("### 💰 Configuration des Frais Personnalisés")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**📤 Frais de vente**")
+            sell_fee_type = st.radio(
+                "Type de frais de vente",
+                options=["Fixe (€)", "Pourcentage (%)"],
+                key="sell_fee_type"
+            )
+            
+            if sell_fee_type == "Fixe (€)":
+                custom_sell_fee = st.number_input(
+                    "Frais de vente fixes",
+                    min_value=0.0,
+                    value=0.99,
+                    step=0.01,
+                    format="%.2f",
+                    help="Montant fixe en euros",
+                    key="custom_sell_fee_fixed"
+                )
+                custom_sell_fee_type = "fixed"
+            else:
+                custom_sell_fee = st.number_input(
+                    "Frais de vente en %",
+                    min_value=0.0,
+                    max_value=10.0,
+                    value=0.1,
+                    step=0.01,
+                    format="%.3f",
+                    help="Pourcentage du montant de la transaction",
+                    key="custom_sell_fee_percent"
+                )
+                custom_sell_fee_type = "percentage"
+        
+        with col2:
+            st.markdown("**📥 Frais d'achat**")
+            buy_fee_type = st.radio(
+                "Type de frais d'achat",
+                options=["Fixe (€)", "Pourcentage (%)"],
+                key="buy_fee_type"
+            )
+            
+            if buy_fee_type == "Fixe (€)":
+                custom_buy_fee = st.number_input(
+                    "Frais d'achat fixes",
+                    min_value=0.0,
+                    value=0.99,
+                    step=0.01,
+                    format="%.2f",
+                    help="Montant fixe en euros",
+                    key="custom_buy_fee_fixed"
+                )
+                custom_buy_fee_type = "fixed"
+            else:
+                custom_buy_fee = st.number_input(
+                    "Frais d'achat en %",
+                    min_value=0.0,
+                    max_value=10.0,
+                    value=0.1,
+                    step=0.01,
+                    format="%.3f",
+                    help="Pourcentage du montant de la transaction",
+                    key="custom_buy_fee_percent"
+                )
+                custom_buy_fee_type = "percentage"
+        
+        # Résumé des frais personnalisés
+        st.markdown("**📋 Résumé de vos frais :**")
+        if custom_sell_fee_type == "fixed":
+            sell_summary = f"Vente : {custom_sell_fee:.2f}€ fixe"
+        else:
+            sell_summary = f"Vente : {custom_sell_fee:.3f}%"
+        
+        if custom_buy_fee_type == "fixed":
+            buy_summary = f"Achat : {custom_buy_fee:.2f}€ fixe"
+        else:
+            buy_summary = f"Achat : {custom_buy_fee:.3f}%"
+        
+        st.info(f"🔸 {sell_summary} | 🔸 {buy_summary}")
+    
+    # Affichage de la grille sélectionnée (seulement pour les courtiers prédéfinis)
+    elif selected_broker and selected_grille and selected_broker != "Personnalisé":
         st.markdown("**📋 Grille tarifaire sélectionnée :**")
         grille_data = broker_structures[selected_broker]["grilles"][selected_grille]
         render_grille_display(selected_grille, grille_data)
@@ -657,11 +760,25 @@ def main():
             st.error("Veuillez remplir tous les champs nécessaires")
             return
         
+        # Préparer les paramètres pour les frais personnalisés
+        if selected_broker == "Personnalisé":
+            custom_sell_fee_param = custom_sell_fee
+            custom_sell_fee_type_param = custom_sell_fee_type
+            custom_buy_fee_param = custom_buy_fee
+            custom_buy_fee_type_param = custom_buy_fee_type
+        else:
+            custom_sell_fee_param = None
+            custom_sell_fee_type_param = None
+            custom_buy_fee_param = None
+            custom_buy_fee_type_param = None
+        
         # CALCUL AVEC LA LOGIQUE TD
         results = calculate_replacement_profitability_td(
             etf1_shares, etf1_price, etf1_td,
             etf2_price, etf2_td,
-            selected_broker, selected_grille, broker_structures
+            selected_broker, selected_grille, broker_structures,
+            custom_sell_fee_param, custom_sell_fee_type_param,
+            custom_buy_fee_param, custom_buy_fee_type_param
         )
         
         st.markdown("---")
